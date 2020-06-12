@@ -15,22 +15,20 @@
  */
 
 @import 'common.scss';
-
+:root {
+	--margenIzq: 15px;
+  }
 #cantidad {
-	$closeSize : 50px;
+	$closeSize : 40px;
 	position: absolute;
 	top: 15px;
-	right: 200px;
-	width: $closeSize*2;
-	height: $closeSize;
+	right: 60px;
+	width: 60px;
+	height: 40px;
 	cursor: pointer;
 	z-index: 2000;
 	transition: transform 0.1s;
 	text-align: center;
-
-	&:hover {
-		transform: scale(1.1);
-	}
 
 	&:before{
 		font-family: $font-family;
@@ -45,7 +43,6 @@
 	&.open:before{
 		content: "0";
 		background-color: white;
-		/*border-radius: 50%;*/
 		display: none;
 	}
 
@@ -54,11 +51,11 @@
 	}
 }
 #botonMas {
-	$closeSize : 20px;
+	$closeSize : 40px;
 	position: absolute;
 	top: 15px;
-	right: 200px;
-	width: $closeSize*2;
+	right: 15px;
+	width: $closeSize;
 	height: $closeSize;
 	cursor: pointer;
 	z-index: 2000;
@@ -91,11 +88,11 @@
 	}
 }
 #botonMenos {
-	$closeSize : 20px;
+	$closeSize : 40px;
 	position: absolute;
 	top: 15px;
-	right: 300px;
-	width: $closeSize*2;
+	right: 125px;
+	width: $closeSize;
 	height: $closeSize;
 	cursor: pointer;
 	z-index: 2000;
@@ -131,9 +128,9 @@
 	$closeSize : 50px;
 	position: absolute;
 	top: 15px;
-	right: 25px;
+	right: 185px;
 	width: $closeSize*2;
-	height: $closeSize;
+	height: 40px;
 	cursor: pointer;
 	z-index: 1000;
 	transition: transform 0.1s;
@@ -151,7 +148,7 @@
 		position: absolute;
 		top: 0px;
 		right: 0px;
-		line-height: $closeSize;
+		line-height: 40px;
 	}
 
 	/*&.close:before{
