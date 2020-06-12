@@ -44,6 +44,10 @@ class AI extends events.EventEmitter{
 	}
 
 	send(){
+		var element = document.getElementById("cantidad");
+		var valor=element.textContent;
+		//alert(valor);
+
 		//trim the track to the first note
 		if (this._track.length){
 			console.log(this._track.notes);
@@ -53,7 +57,7 @@ class AI extends events.EventEmitter{
 					if (note.noteOn + now > this._aiEndTime){
 						var chord=Tone.Frequency(note.midi, 'midi').toNote();
 						console.log('chord:'+chord);
-						var chord_transpose=Tone.Frequency(chord).transpose(2).toNote();//3 semitonos
+						var chord_transpose=Tone.Frequency(chord).transpose(valor).toNote();//3 semitonos
 						console.log('chord_transpose:'+chord_transpose);
 						//vuelta a midi
 						var note_transpose=Tone.Frequency(chord_transpose).toMidi();

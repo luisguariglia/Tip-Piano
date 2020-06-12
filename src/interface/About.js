@@ -32,7 +32,7 @@ const blurbCopy = `Built by Yotam Mann with friends on the Magenta and Creative 
 
 export class About extends events.EventEmitter{
 	constructor(container){
-
+		var cantidad=0;
 		super()
 
 		this._container = document.createElement('div')
@@ -41,6 +41,13 @@ export class About extends events.EventEmitter{
 
 
 		//botones de semitonos
+		this.cantidad = document.createElement('div')
+		this.cantidad.id = 'cantidad'
+		this.cantidad.classList.add('open')
+		//this.cantidad.classList.add('open')
+		container.appendChild(this.cantidad)
+
+
 		this._BotonMas = document.createElement('div')
 		this._BotonMas.id = 'botonMas'
 		this._BotonMas.classList.add('open')
@@ -50,6 +57,8 @@ export class About extends events.EventEmitter{
 			if (this.isOpen()){
 				this.close()
 			} else {
+				cantidad++;
+				this.cantidad.innerHTML="<p style='z-index: 5000;color:white;'>"+cantidad+"</p>";
 				//this.open()
 			}
 		})
@@ -62,13 +71,12 @@ export class About extends events.EventEmitter{
 			if (this.isOpen()){
 				this.close()
 			} else {
+				cantidad--;
+				this.cantidad.innerHTML="<p style='z-index: 5000;color:white;'>"+cantidad+"</p>";
 				//this.open()
 			}
 		})
-		this.cantidad = document.createElement('div')
-		this.cantidad.id = 'cantidad'
-		this.cantidad.classList.add('open')
-		container.appendChild(this.cantidad)
+		
 		
 		//
 		this._toggleButton = document.createElement('div')
@@ -171,9 +179,11 @@ export class About extends events.EventEmitter{
 		}	
 	}
 	isOpen(){
+		
 		return this._container.classList.contains('visible')
 	}
 	showButton(){
+		
 		this._toggleButton.classList.add('show')
 		this._BotonMas.classList.add('show')
 		this._BotonMenos.classList.add('show')
