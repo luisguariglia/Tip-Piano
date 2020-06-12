@@ -11,14 +11,6 @@ body, #container{
 	margin: 0px;
 	background-color: black;
 
-	.boton{
-		position:absolute;
-		top: 0px;
-		right: 0px;
-		width: 100px;
-		height: 100px;
-		background-color: red;
-	}
 	#keyboard {
 		position: absolute;
 		bottom: $bottomHeight;

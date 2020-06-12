@@ -17,11 +17,11 @@
 @import 'common.scss';
 
 #aboutButton {
-	$closeSize : 30px;
+	$closeSize : 50px;
 	position: absolute;
 	top: 15px;
 	right: 15px;
-	width: $closeSize;
+	width: $closeSize*2;
 	height: $closeSize;
 	cursor: pointer;
 	z-index: 1000;
@@ -51,9 +51,9 @@
 
 	}
 	&.open:before{
-		content: "?";
+		content: "Transportar";
 		background-color: white;
-		border-radius: 50%;
+		/*border-radius: 50%;*/
 		display: none;
 	}
 

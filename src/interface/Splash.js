@@ -81,9 +81,9 @@ class Splash extends events.EventEmitter{
 		badges.appendChild(googleFriends)*/
 
 		//break two
-		const break1 = document.createElement('div')
+		/*const break1 = document.createElement('div')
 		break1.classList.add('badgeBreak')
-		badges.appendChild(break1)
+		badges.appendChild(break1)*/
 
 		const magenta = document.createElement('a')
 		magenta.href = 'https://magenta.tensorflow.org/'

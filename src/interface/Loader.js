@@ -50,7 +50,7 @@ export default class Loader extends EventEmitter{
 
 			this.loaded = true
 
-			fillText.innerHTML = '<div id="piano"></div> <div id="play">PLAY</div>'
+			fillText.innerHTML = '<div id="piano"></div> <div id=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOCAR</div>'
 			loader.classList.add('clickable')
 
 			loader.addEventListener('click', () => {
