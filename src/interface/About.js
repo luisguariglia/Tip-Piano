@@ -39,6 +39,33 @@ export class About extends events.EventEmitter{
 		this._container.id = 'about'
 		container.appendChild(this._container)
 
+
+		//botones de semitonos
+		this._BotonMas = document.createElement('div')
+		this._BotonMas.id = 'botonMas'
+		this._BotonMas.classList.add('open')
+		container.appendChild(this._BotonMas)
+		this._BotonMas.addEventListener('click', (e) => {
+			e.preventDefault()
+			if (this.isOpen()){
+				this.close()
+			} else {
+				this.open()
+			}
+		})
+		this._BotonMenos = document.createElement('div')
+		this._BotonMenos.id = 'botonMenos'
+		this._BotonMenos.classList.add('open')
+		container.appendChild(this._BotonMenos)
+		this._BotonMenos.addEventListener('click', (e) => {
+			e.preventDefault()
+			if (this.isOpen()){
+				this.close()
+			} else {
+				this.open()
+			}
+		})
+		//
 		this._toggleButton = document.createElement('div')
 		this._toggleButton.id = 'aboutButton'
 		this._toggleButton.classList.add('open')
@@ -91,6 +118,12 @@ export class About extends events.EventEmitter{
 
 	}
 	close(){
+		this._BotonMenos.classList.remove('close')
+		this._BotonMenos.classList.add('open')
+
+		this._BotonMas.classList.remove('close')
+		this._BotonMas.classList.add('open')
+
 		this._toggleButton.classList.remove('close')
 		this._toggleButton.classList.add('open')
 
@@ -133,5 +166,7 @@ export class About extends events.EventEmitter{
 	}
 	showButton(){
 		this._toggleButton.classList.add('show')
+		this._BotonMas.classList.add('show')
+		this._BotonMenos.classList.add('show')
 	}
 }
