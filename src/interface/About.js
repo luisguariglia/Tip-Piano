@@ -15,7 +15,7 @@
  */
 
 import 'style/about.css'
-import YouTubeIframeLoader from 'youtube-iframe'
+//import YouTubeIframeLoader from 'youtube-iframe'
 import events from 'events'
 
 const magentaLink = 'https://magenta.tensorflow.org/'
@@ -50,7 +50,7 @@ export class About extends events.EventEmitter{
 			if (this.isOpen()){
 				this.close()
 			} else {
-				this.open()
+				//this.open()
 			}
 		})
 		this._BotonMenos = document.createElement('div')
@@ -62,7 +62,7 @@ export class About extends events.EventEmitter{
 			if (this.isOpen()){
 				this.close()
 			} else {
-				this.open()
+				//this.open()
 			}
 		})
 		this.cantidad = document.createElement('div')
@@ -77,10 +77,11 @@ export class About extends events.EventEmitter{
 		container.appendChild(this._toggleButton)
 		this._toggleButton.addEventListener('click', (e) => {
 			e.preventDefault()
-			if (this.isOpen()){
+			if (this.isOpen()){			//esto siempre entra en fase
 				this.close()
+				
 			} else {
-				this.open()
+				this.open()  
 			}
 		})
 
@@ -106,7 +107,7 @@ export class About extends events.EventEmitter{
 		this._playButton.classList.add('visible')
 		video.appendChild(this._playButton)
 
-		YouTubeIframeLoader.load((YT) => {
+		/*YouTubeIframeLoader.load((YT) => {
 			this._ytplayer = new YT.Player('youtube-iframe', {
 				events : {
 					onStateChange : (state) => {
@@ -114,7 +115,7 @@ export class About extends events.EventEmitter{
 					}
 				}
 			})
-		})
+		})*/
 
 		const blurb = document.createElement('div')
 		blurb.id = 'blurb'
@@ -123,14 +124,14 @@ export class About extends events.EventEmitter{
 
 	}
 	close(){
-		this.cantidad.classList.remove('close')
-		this.cantidad.classList.add('open')
+		//this.cantidad.classList.remove('close')
+		//this.cantidad.classList.add('open')
 
-		this._BotonMenos.classList.remove('close')
-		this._BotonMenos.classList.add('open')
+		//this._BotonMenos.classList.remove('close')
+		//this._BotonMenos.classList.add('open')
 
-		this._BotonMas.classList.remove('close')
-		this._BotonMas.classList.add('open')
+		//this._BotonMas.classList.remove('close')
+		//this._BotonMas.classList.add('open')
 
 		this._toggleButton.classList.remove('close')
 		this._toggleButton.classList.add('open')
