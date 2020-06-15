@@ -62,27 +62,6 @@ class Splash extends events.EventEmitter{
 		badges.id = 'badges'
 		splash.appendChild(badges)
 
-		/*const aiExperiments = document.createElement('a')
-		aiExperiments.id = 'aiExperiments'
-		aiExperiments.href = 'https://www.fing.edu.uy/tecnoinf/paysandu/index.html'
-		aiExperiments.target = '_blank'
-		aiExperiments.classList.add('badge')
-		badges.appendChild(aiExperiments)
-
-		// break
-		const break0 = document.createElement('div')
-		break0.classList.add('badgeBreak')
-		badges.appendChild(break0)
-
-		const googleFriends = document.createElement('a')
-		googleFriends.id = 'googleFriends'
-		googleFriends.classList.add('badge')
-		badges.appendChild(googleFriends)
-
-		//break two
-		const break1 = document.createElement('div')
-		break1.classList.add('badgeBreak')
-		badges.appendChild(break1)*/
 
 		const tip = document.createElement('a')
 		tip.href = 'https://www.fing.edu.uy/tecnoinf/paysandu/index.html'

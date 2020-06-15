@@ -57,7 +57,13 @@ export class About extends events.EventEmitter{
 			if (this.isOpen()){
 				this.close()
 			} else {
-				cantidad++;
+				if(cantidad>=12){
+					cantidad=12;
+				}else{
+					cantidad++;
+				}
+				
+				
 				this.cantidad.innerHTML="<p style='z-index: 5000;color:white;'>"+cantidad+"</p>";
 				//this.open()
 			}
@@ -71,7 +77,11 @@ export class About extends events.EventEmitter{
 			if (this.isOpen()){
 				this.close()
 			} else {
-				cantidad--;
+				if(cantidad<=-12){
+					cantidad=-12;
+				}else{
+					cantidad--;
+				}
 				this.cantidad.innerHTML="<p style='z-index: 5000;color:white;'>"+cantidad+"</p>";
 				//this.open()
 			}
@@ -132,6 +142,7 @@ export class About extends events.EventEmitter{
 
 	}
 	close(){
+		
 		//this.cantidad.classList.remove('close')
 		//this.cantidad.classList.add('open')
 
@@ -155,6 +166,7 @@ export class About extends events.EventEmitter{
 		}
 	}
 	open(play=false){
+		
 		/*this._toggleButton.classList.add('close')
 		this._toggleButton.classList.remove('open')
 

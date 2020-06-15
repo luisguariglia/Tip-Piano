@@ -47,7 +47,7 @@ class AI extends events.EventEmitter{
 		var element = document.getElementById("cantidad");
 		var valor=element.textContent;
 		//alert(valor);
-
+		
 		//trim the track to the first note
 		if (this._track.length){
 			console.log(this._track.notes);
