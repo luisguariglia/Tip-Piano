@@ -172,7 +172,7 @@ $topMargin: 35px;
 		margin-top: $topMargin;
 	}
 
-	$badgeWidth : 120px;
+	$badgeWidth : 130px;
 	$badgeHeight: 60px;
 	$badgeMargin : 20px;
 	$badegOpacity: 0.7;
@@ -222,7 +222,9 @@ $topMargin: 35px;
 		}
 
 		#aiExperiments {
-			background-image: url(../images/badgeAI_master.svg);
+			background-image: url(../images/logo_fing1.gif);
+			width: 50px;
+			height: 50px;
 			&:hover {
 				opacity: 1;
 				&:active {
@@ -242,7 +244,7 @@ $topMargin: 35px;
 			font-weight: bold;
 			font-size: 12px;
 			margin-left: 0px;
-		    margin-right: 0px;
+		    margin-right: 5px;
 		    color: white;
 
 			&:hover {
@@ -261,9 +263,18 @@ $topMargin: 35px;
 
 			$imgSize : $badgeHeight;
 			$smallImg : $smallBadgeHeight;
+			#imgUtec{
+				background-image: url(../images/logo-150-x-105.png);
+				background-size: 110% 80%;
+				background-position: left center;
+				background-repeat: no-repeat;
+				width: $imgSize;
+				height: $imgSize;
+				float: left;
+			}
 			#img {
-				background-image: url(../images/magenta_bw_logo.png);
-				background-size: 90% 90%;
+				background-image: url(../images/logo_fing1.gif);
+				background-size: 85% 85%;
 				background-position: left center;
 				background-repeat: no-repeat;
 				width: $imgSize;
@@ -274,6 +285,7 @@ $topMargin: 35px;
 					width: $smallImg;
 					height: $smallImg;
 				}
+				
 			}
 
 			#text {

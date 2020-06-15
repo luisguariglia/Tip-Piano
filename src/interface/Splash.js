@@ -34,7 +34,7 @@ class Splash extends events.EventEmitter{
 
 		const title = document.createElement('div')
 		title.id = 'title'
-		title.textContent = 'A.I. Duet'
+		title.textContent = 'TIP Piano'
 		titleContainer.appendChild(title)
 
 		const subTitle = document.createElement('div')
@@ -62,11 +62,10 @@ class Splash extends events.EventEmitter{
 		badges.id = 'badges'
 		splash.appendChild(badges)
 
-		const aiExperiments = document.createElement('a')
+		/*const aiExperiments = document.createElement('a')
 		aiExperiments.id = 'aiExperiments'
-		aiExperiments.href = 'https://aiexperiments.withgoogle.com'
+		aiExperiments.href = 'https://www.fing.edu.uy/tecnoinf/paysandu/index.html'
 		aiExperiments.target = '_blank'
-		
 		aiExperiments.classList.add('badge')
 		badges.appendChild(aiExperiments)
 
@@ -75,29 +74,43 @@ class Splash extends events.EventEmitter{
 		break0.classList.add('badgeBreak')
 		badges.appendChild(break0)
 
-		/*const googleFriends = document.createElement('a')
+		const googleFriends = document.createElement('a')
 		googleFriends.id = 'googleFriends'
 		googleFriends.classList.add('badge')
-		badges.appendChild(googleFriends)*/
+		badges.appendChild(googleFriends)
 
 		//break two
-		/*const break1 = document.createElement('div')
+		const break1 = document.createElement('div')
 		break1.classList.add('badgeBreak')
 		badges.appendChild(break1)*/
 
-		const magenta = document.createElement('a')
-		magenta.href = 'https://magenta.tensorflow.org/'
-		magenta.target = '_blank'
-		magenta.id = 'magentaLink'
-		magenta.classList.add('badge')
+		const tip = document.createElement('a')
+		tip.href = 'https://www.fing.edu.uy/tecnoinf/paysandu/index.html'
+		tip.target = '_blank'
+		tip.id = 'magentaLink'
+		tip.classList.add('badge')
 		const imgHtml = '<div id="img"></div>'
-		magenta.innerHTML = imgHtml + '<div id="text">Construido usando <span>Magenta</span></div>'
-		badges.appendChild(magenta)
+		tip.innerHTML = imgHtml + '<div id="text">Tecnólogo en Informática</div>'
+		badges.appendChild(tip)
 
-		const privacyAndTerms = document.createElement('div')
+		// break
+		const break0 = document.createElement('div')
+		break0.classList.add('badgeBreak')
+		badges.appendChild(break0)
+
+		const utec = document.createElement('a')
+		utec.href = 'https://utec.edu.uy/'
+		utec.target = '_blank'
+		utec.id = 'magentaLink'
+		utec.classList.add('badge')
+		const imgHtmlUtec = '<div id="imgUtec"></div>'
+		utec.innerHTML = imgHtmlUtec + '<div id="text"></div>'
+		badges.appendChild(utec)
+
+		/*const privacyAndTerms = document.createElement('div')
 		privacyAndTerms.id = 'privacyAndTerms'
 		privacyAndTerms.innerHTML = '<a target="_blank" href="https://www.google.com/intl/en/policies/privacy/">Privacy</a><span>&</span><a target="_blank" href="https://www.google.com/intl/en/policies/terms/">Terms</a>'
-		splash.appendChild(privacyAndTerms)
+		splash.appendChild(privacyAndTerms)*/
 
 	}
 
