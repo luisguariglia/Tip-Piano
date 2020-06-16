@@ -109,8 +109,8 @@ export class About extends events.EventEmitter{
 
 		const title = document.createElement('div')
 		title.id = 'title'
-		title.textContent = 'A.I. Duet'
-		// content.appendChild(title)
+		title.textContent = 'TIP Piano'
+		//content.appendChild(title)
 
 		const video = document.createElement('div')
 		video.id = 'video'
