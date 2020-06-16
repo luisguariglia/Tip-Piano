@@ -20,10 +20,18 @@ import Tone from 'Tone/core/Tone'
 import events from 'events'
 
 class AI extends events.EventEmitter{
+	
 	constructor(){
 		super()
 
+		this.init();
+	}
+	init(){
+		this.guardarNotas;
+		this.guardarMidi;
 		this._newTrack()
+		//this.guardarNotas=this._track;
+		//this.guardarMidi=this._midi;
 
 		this._sendTimeout = -1
 
@@ -34,7 +42,6 @@ class AI extends events.EventEmitter{
 
 		this._aiEndTime = 0
 	}
-
 	_newTrack(){
 		debugger;
 		this._midi = new MidiConvert.create()
@@ -46,19 +53,33 @@ class AI extends events.EventEmitter{
 	send(){
 		var element = document.getElementById("cantidad");
 		var valor=element.textContent;
-		//alert(valor);
+
+		//alert(this.guardarNotas.length+"-notas-"+this.guardarNotas.notes);
 		
 		//trim the track to the first note
-		if (this._track.length){
-			console.log(this._track.notes);
+		if (this._track.length||this.guardarNotas !== undefined){
+			
+			if (!this._track.length){
+				this.init();
+				this._newTrack();
+				this._track=null;
+				this._track=this.guardarNotas;
+				this._midi=this.guardarMidi;
+			}else{
+				this.guardarMidi=null;
+				this.guardarNotas=null;
+				this.guardarNotas=this._track;
+				this.guardarMidi=this._midi;
+			}
+			
 			this._track.notes.forEach((note) => {
-					console.log(note);
+					//console.log(note);
 					const now = Tone.now() + 0.05
-					if (note.noteOn + now > this._aiEndTime){
+					if (note.noteOn + now > this._aiEndTime){						
 						var chord=Tone.Frequency(note.midi, 'midi').toNote();
-						console.log('chord:'+chord);
+						//console.log('chord:'+chord);
 						var chord_transpose=Tone.Frequency(chord).transpose(valor).toNote();//3 semitonos
-						console.log('chord_transpose:'+chord_transpose);
+						//console.log('chord_transpose:'+chord_transpose);
 						//vuelta a midi
 						var note_transpose=Tone.Frequency(chord_transpose).toMidi();
 						this._aiEndTime = note.noteOn + now
@@ -79,7 +100,7 @@ class AI extends events.EventEmitter{
 			let additional = endTime
 			additional = Math.min(additional, 8)
 			additional = Math.max(additional, 1)
-			console.log(request)
+			//console.log(request)
 			/*request.load(`./predict?duration=${endTime + additional}`, JSON.stringify(request.toArray()), 'POST').then((response) => {
 				response.slice(endTime / 2).tracks[1].notes.forEach((note) => {
 					const now = Tone.now() + 0.05
@@ -98,8 +119,8 @@ class AI extends events.EventEmitter{
 	}
 
 	keyDown(note, time=Tone.now()){
-		console.log('keyUpAI');
-		console.log('note'+note);
+		//console.log('keyUpAI');
+		//console.log('note'+note);
 		if (this._track.length === 0 ){//&& this._lastPhrase === -1
 			this._lastPhrase = Date.now()
 			this._firstPhrase = Tone.now()
@@ -111,8 +132,8 @@ class AI extends events.EventEmitter{
 	}
 
 	keyUp(note, time=Tone.now()){
-		console.log('keyUpAI');
-		console.log('note'+note);
+		//console.log('keyUpAI');
+		//console.log('note'+note);
 		this._track.noteOff(note, time)
 		delete this._heldNotes[note]
 		// send something if there are no events for a moment

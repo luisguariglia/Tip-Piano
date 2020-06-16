@@ -157,10 +157,10 @@ export class About extends events.EventEmitter{
 
 		this._container.classList.remove('visible')
 
-		if (this._ytplayer && this._ytplayer.stopVideo){
+		/*if (this._ytplayer && this._ytplayer.stopVideo){
 			this._ytplayer.stopVideo()
-		}
-		this.emit('close')
+		}*/
+		//this.emit('close')
 		if (window.ga){
 			ga('send', 'event', 'AI-Duet', 'Click', 'About - Close')
 		}
