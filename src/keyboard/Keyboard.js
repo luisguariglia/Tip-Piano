@@ -36,12 +36,18 @@ class Keyboard extends events.EventEmitter{
 		 */
 		this._keyboard = new AudioKeys({polyphony : 88, rows : 1, octaveControls : false})
 		this._keyboard.down((e) => {
-			this.keyDown(e.note)
-			this._emitKeyDown(e.note)
+			var paso1=Tone.Frequency(e.note,"midi").toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			var paso3=Tone.Frequency(paso2).toMidi();
+			this.keyDown(paso3)
+			this._emitKeyDown(paso3)
 		})
 		this._keyboard.up((e) => {
-			this.keyUp(e.note)
-			this._emitKeyUp(e.note)
+			var paso1=Tone.Frequency(e.note,"midi").toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			var paso3=Tone.Frequency(paso2).toMidi();
+			this.keyUp(paso3)
+			this._emitKeyUp(paso3)
 		})
 
 		/**
@@ -50,11 +56,7 @@ class Keyboard extends events.EventEmitter{
 		this._keyboardInterface = new KeyboardElement(container, 48, 2)
 		this._keyboardInterface.on('keyDown', (note) => {
 			var paso1=Tone.Frequency(note,"midi").toNote();
-			//alert(paso1)		
-			//transporto la nota
-			var paso2=Tone.Frequency(paso1).transpose(-12).toNote();
-			//alert(paso2)
-			//la paso a midi	
+			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
 			var paso3=Tone.Frequency(paso2).toMidi();
 
 			this.keyDown(paso3)
@@ -64,7 +66,7 @@ class Keyboard extends events.EventEmitter{
 			var paso1=Tone.Frequency(note,"midi").toNote();
 			//alert(paso1)		
 			//transporto la nota
-			var paso2=Tone.Frequency(paso1).transpose(-12).toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
 			//alert(paso2)
 			//la paso a midi	
 			var paso3=Tone.Frequency(paso2).toMidi();
