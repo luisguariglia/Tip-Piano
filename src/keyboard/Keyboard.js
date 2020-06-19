@@ -52,7 +52,7 @@ class Keyboard extends events.EventEmitter{
 			var paso1=Tone.Frequency(note,"midi").toNote();
 			//alert(paso1)		
 			//transporto la nota
-			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			var paso2=Tone.Frequency(paso1).transpose(-12).toNote();
 			//alert(paso2)
 			//la paso a midi	
 			var paso3=Tone.Frequency(paso2).toMidi();
@@ -64,7 +64,7 @@ class Keyboard extends events.EventEmitter{
 			var paso1=Tone.Frequency(note,"midi").toNote();
 			//alert(paso1)		
 			//transporto la nota
-			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			var paso2=Tone.Frequency(paso1).transpose(-12).toNote();
 			//alert(paso2)
 			//la paso a midi	
 			var paso3=Tone.Frequency(paso2).toMidi();
