@@ -74,15 +74,15 @@ keyboard.on('keyDown', (note) => {
 	var paso1=Tone.Frequency(note,"midi").toNote();
 	//alert(paso1)		
 	//transporto la nota
-	var paso2=Tone.Frequency(paso1).transpose(3).toNote();
+	var paso2=Tone.Frequency(paso1).transpose(12).toNote();
 	//alert(paso2)
 	//la paso a midi	
 	var paso3=Tone.Frequency(paso2).toMidi();
 	//alert(paso3)
 	
 
-	sound.keyDown(paso3)
-	ai.keyDown(paso3)
+	sound.keyDown(note)
+	ai.keyDown(note)
 	glow.user()
 	//obtengo la nota y la transporto
 	//console.log('note:'+note);
@@ -112,14 +112,14 @@ keyboard.on('keyUp', (note) => {
 	var paso1=Tone.Frequency(note,"midi").toNote();
 	//alert(paso1)		
 	//transporto la nota
-	var paso2=Tone.Frequency(paso1).transpose(3).toNote();
+	var paso2=Tone.Frequency(paso1).transpose(12).toNote();
 	//alert(paso2)
 	//la paso a midi	
 	var paso3=Tone.Frequency(paso2).toMidi();
 	//alert(paso3)
 
-	sound.keyUp(paso3)
-	ai.keyUp(paso3)
+	sound.keyUp(note)
+	ai.keyUp(note)
 	glow.user()
 })
 

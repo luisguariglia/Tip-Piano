@@ -49,12 +49,28 @@ class Keyboard extends events.EventEmitter{
 		 */
 		this._keyboardInterface = new KeyboardElement(container, 48, 2)
 		this._keyboardInterface.on('keyDown', (note) => {
-			this.keyDown(note)
-			this._emitKeyDown(note)
+			var paso1=Tone.Frequency(note,"midi").toNote();
+			//alert(paso1)		
+			//transporto la nota
+			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			//alert(paso2)
+			//la paso a midi	
+			var paso3=Tone.Frequency(paso2).toMidi();
+
+			this.keyDown(paso3)
+			this._emitKeyDown(paso3)
 		})
 		this._keyboardInterface.on('keyUp', (note) => {
-			this.keyUp(note)
-			this._emitKeyUp(note)
+			var paso1=Tone.Frequency(note,"midi").toNote();
+			//alert(paso1)		
+			//transporto la nota
+			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			//alert(paso2)
+			//la paso a midi	
+			var paso3=Tone.Frequency(paso2).toMidi();
+
+			this.keyUp(paso3)
+			this._emitKeyUp(paso3)
 		})
 
 		window.addEventListener('resize', this._resize.bind(this))
