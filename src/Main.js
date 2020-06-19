@@ -69,20 +69,32 @@ const sound = new Sound()
 sound.load()
 
 keyboard.on('keyDown', (note) => {
-	Frequency(note, 'midi').toNote()
-	sound.keyDown(note)
-	ai.keyDown(note)
+	//alert(note)		
+	//paso de midi a note
+	var paso1=Tone.Frequency(note,"midi").toNote();
+	//alert(paso1)		
+	//transporto la nota
+	var paso2=Tone.Frequency(paso1).transpose(3).toNote();
+	//alert(paso2)
+	//la paso a midi	
+	var paso3=Tone.Frequency(paso2).toMidi();
+	//alert(paso3)
+	
+
+	sound.keyDown(paso3)
+	ai.keyDown(paso3)
 	glow.user()
 	//obtengo la nota y la transporto
-	/*console.log('note:'+note);
-	var chord=Tone.Frequency(note, 'midi').toNote();
-	console.log('chord:'+chord);
+	//console.log('note:'+note);
+	/*var chord=Tone.Frequency(note, 'midi').toNote();
+	alert(chord);
+	//console.log('chord:'+chord);
 	var chord_transpose=Tone.Frequency(chord).transpose(3).toNote();//3 semitonos
-	console.log('chord_transpose:'+chord_transpose);
+	//console.log('chord_transpose:'+chord_transpose);
 	//vuelta a midi
 	var note_transpose=Tone.Frequency(chord_transpose).toMidi();
 	const now = Tone.now();
-	console.log(now);
+	//console.log(now);
 	sound.keyDown(note_transpose,now,true);
 	keyboard.keyDown(note_transpose,now,true);
 	glow.ai(now);
@@ -90,13 +102,24 @@ keyboard.on('keyDown', (note) => {
 			sound.keyUp(note_transpose, Tone.now(), true);
 			keyboard.keyUp(note_transpose, Tone.now(), true);
 			glow.ai(Tone.now());
-		}, 1000);
-	*/
+		}, 1000);*/
+	
 })
 
 keyboard.on('keyUp', (note) => {
-	sound.keyUp(note)
-	ai.keyUp(note)
+	//alert(note)		
+	//paso de midi a note
+	var paso1=Tone.Frequency(note,"midi").toNote();
+	//alert(paso1)		
+	//transporto la nota
+	var paso2=Tone.Frequency(paso1).transpose(3).toNote();
+	//alert(paso2)
+	//la paso a midi	
+	var paso3=Tone.Frequency(paso2).toMidi();
+	//alert(paso3)
+
+	sound.keyUp(paso3)
+	ai.keyUp(paso3)
 	glow.user()
 })
 
