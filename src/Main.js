@@ -107,17 +107,7 @@ keyboard.on('keyDown', (note) => {
 })
 
 keyboard.on('keyUp', (note) => {
-	//alert(note)		
-	//paso de midi a note
-	var paso1=Tone.Frequency(note,"midi").toNote();
-	//alert(paso1)		
-	//transporto la nota
-	var paso2=Tone.Frequency(paso1).transpose(12).toNote();
-	//alert(paso2)
-	//la paso a midi	
-	var paso3=Tone.Frequency(paso2).toMidi();
-	//alert(paso3)
-
+	
 	sound.keyUp(note)
 	ai.keyUp(note)
 	glow.user()

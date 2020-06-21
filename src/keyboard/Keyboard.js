@@ -29,7 +29,7 @@ class Keyboard extends events.EventEmitter{
 		this._container = container
 
 		this._active = false
-
+		var octava=0;
 		/**
 		 * The audio key keyboard
 		 * @type {AudioKeys}
@@ -37,14 +37,14 @@ class Keyboard extends events.EventEmitter{
 		this._keyboard = new AudioKeys({polyphony : 88, rows : 1, octaveControls : false})
 		this._keyboard.down((e) => {
 			var paso1=Tone.Frequency(e.note,"midi").toNote();
-			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
 			var paso3=Tone.Frequency(paso2).toMidi();
 			this.keyDown(paso3)
 			this._emitKeyDown(paso3)
 		})
 		this._keyboard.up((e) => {
 			var paso1=Tone.Frequency(e.note,"midi").toNote();
-			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
 			var paso3=Tone.Frequency(paso2).toMidi();
 			this.keyUp(paso3)
 			this._emitKeyUp(paso3)
@@ -56,7 +56,7 @@ class Keyboard extends events.EventEmitter{
 		this._keyboardInterface = new KeyboardElement(container, 48, 2)
 		this._keyboardInterface.on('keyDown', (note) => {
 			var paso1=Tone.Frequency(note,"midi").toNote();
-			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
 			var paso3=Tone.Frequency(paso2).toMidi();
 
 			this.keyDown(paso3)
@@ -66,7 +66,7 @@ class Keyboard extends events.EventEmitter{
 			var paso1=Tone.Frequency(note,"midi").toNote();
 			//alert(paso1)		
 			//transporto la nota
-			var paso2=Tone.Frequency(paso1).transpose(12).toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
 			//alert(paso2)
 			//la paso a midi	
 			var paso3=Tone.Frequency(paso2).toMidi();
@@ -94,11 +94,17 @@ class Keyboard extends events.EventEmitter{
 		//the midi input
 		this._midi = new Midi()
 		this._midi.on('keyDown', (note) => {
-			this.keyDown(note)
+			var paso1=Tone.Frequency(note,"midi").toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
+			var paso3=Tone.Frequency(paso2).toMidi();
+			this.keyDown(paso3)
 			this._emitKeyDown(note)
 		})
 		this._midi.on('keyUp', (note) => {
-			this.keyUp(note)
+			var paso1=Tone.Frequency(note,"midi").toNote();
+			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
+			var paso3=Tone.Frequency(paso2).toMidi();
+			this.keyUp(paso3)
 			this._emitKeyUp(note)
 		})
 	}
