@@ -55,13 +55,13 @@
 	position: absolute;
 	top: 15px;
 	left: 15px;
-	width: $closeSize;
+	width: $closeSize*2;
 	height: $closeSize;
 	cursor: pointer;
 	z-index: 2000;
 	transition: transform 0.1s;
 	text-align: center;
-
+	
 	&:hover {
 		transform: scale(1.1);
 	}
@@ -77,9 +77,9 @@
 		line-height: $closeSize;
 	}
 	&.open:before{
-		content: "+";
+		content: "Octava";
 		background-color: #e3ad0b;
-		border-radius: 50%;
+		/*border-radius: 50%;*/
 		display: none;
 	}
 
