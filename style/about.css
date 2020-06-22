@@ -50,17 +50,21 @@
 		display: inline-block;
 	}
 }
-/*#cantidad {
+#botonMasOctava {
 	$closeSize : 40px;
 	position: absolute;
 	top: 15px;
-	right: 60px;
-	width: 60px;
-	height: 40px;
+	left: 15px;
+	width: $closeSize;
+	height: $closeSize;
 	cursor: pointer;
 	z-index: 2000;
 	transition: transform 0.1s;
 	text-align: center;
+
+	&:hover {
+		transform: scale(1.1);
+	}
 
 	&:before{
 		font-family: $font-family;
@@ -73,15 +77,16 @@
 		line-height: $closeSize;
 	}
 	&.open:before{
-		content: "0";
-		background-color: white;
+		content: "+";
+		background-color: #e3ad0b;
+		border-radius: 50%;
 		display: none;
 	}
 
 	&.show.open:before {
 		display: inline-block;
 	}
-}*/
+}
 #botonMas {
 	$closeSize : 40px;
 	position: absolute;

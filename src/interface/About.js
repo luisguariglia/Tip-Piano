@@ -33,20 +33,35 @@ const blurbCopy = `Built by Yotam Mann with friends on the Magenta and Creative 
 export class About extends events.EventEmitter{
 	constructor(container){
 		var cantidad=0;
+		var cantidadOctava=4;
 		super()
 
 		this._container = document.createElement('div')
 		this._container.id = 'about'
 		container.appendChild(this._container)
 
-
+		//botones de octavas
+		
+		this._BotonMasOctava = document.createElement('div')
+		this._BotonMasOctava.id = 'botonMasOctava'
+		this._BotonMasOctava.classList.add('open')
+		container.appendChild(this._BotonMasOctava)
+		this._BotonMasOctava.addEventListener('click', (e) => {
+			e.preventDefault()
+			if (this.isOpen()){
+				this.close()
+			} else {
+				cantidadOctava++;
+				cantidadOctava=cantidadOctava%5;			
+				localStorage.setItem('octava', cantidadOctava-2);
+			}
+		})
 		//botones de semitonos
 		this.cantidad = document.createElement('div')
 		this.cantidad.id = 'cantidad'
 		this.cantidad.classList.add('open')
 		//this.cantidad.classList.add('open')
 		container.appendChild(this.cantidad)
-
 
 		this._BotonMas = document.createElement('div')
 		this._BotonMas.id = 'botonMas'
@@ -198,6 +213,7 @@ export class About extends events.EventEmitter{
 		
 		this._toggleButton.classList.add('show')
 		this._BotonMas.classList.add('show')
+		this._BotonMasOctava.classList.add('show')
 		this._BotonMenos.classList.add('show')
 		this.cantidad.classList.add('show')
 	}

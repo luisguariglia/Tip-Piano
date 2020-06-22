@@ -30,12 +30,14 @@ class Keyboard extends events.EventEmitter{
 
 		this._active = false
 		var octava=0;
+		localStorage.setItem('octava', 0);
 		/**
 		 * The audio key keyboard
 		 * @type {AudioKeys}
 		 */
 		this._keyboard = new AudioKeys({polyphony : 88, rows : 1, octaveControls : false})
 		this._keyboard.down((e) => {
+			octava=localStorage.getItem('octava');
 			var paso1=Tone.Frequency(e.note,"midi").toNote();
 			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
 			var paso3=Tone.Frequency(paso2).toMidi();
@@ -55,6 +57,7 @@ class Keyboard extends events.EventEmitter{
 		 */
 		this._keyboardInterface = new KeyboardElement(container, 48, 2)
 		this._keyboardInterface.on('keyDown', (note) => {
+			octava=localStorage.getItem('octava');
 			var paso1=Tone.Frequency(note,"midi").toNote();
 			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
 			var paso3=Tone.Frequency(paso2).toMidi();
@@ -94,6 +97,7 @@ class Keyboard extends events.EventEmitter{
 		//the midi input
 		this._midi = new Midi()
 		this._midi.on('keyDown', (note) => {
+			octava=localStorage.getItem('octava');
 			var paso1=Tone.Frequency(note,"midi").toNote();
 			var paso2=Tone.Frequency(paso1).transpose(12*octava).toNote();
 			var paso3=Tone.Frequency(paso2).toMidi();
@@ -132,6 +136,7 @@ class Keyboard extends events.EventEmitter{
 	}
 
 	keyDown(note, time=Tone.now(), ai=false){
+		
 		if (!this._active){
 			return
 		}
