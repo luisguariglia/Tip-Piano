@@ -29,6 +29,7 @@ const blurbCopy = `Built by Yotam Mann with friends on the Magenta and Creative 
 					from the <a target='_blank' href='${magentaLink}'>Magenta project</a>. 
 					The open-source code is <a target='_blank' href='${sourceCode}'>available here</a>.
 					Click the keyboard, use your computer keys, or even plug in a MIDI keyboard.`
+var midiExportar;
 
 export class About extends events.EventEmitter{
 	constructor(container){
@@ -39,6 +40,91 @@ export class About extends events.EventEmitter{
 		this._container = document.createElement('div')
 		this._container.id = 'about'
 		container.appendChild(this._container)
+
+		//importar midi--------------------------------
+
+		this._divImportar = document.createElement('div');
+		this._divImportar.id='divImportar';
+		this._divImportar.classList.add('open');
+		this._divImportar.innerHTML='<tone-content>		<div id="Description">Parse a MIDI file into a Tone.js-friendly JSON format.</div>		<div id="FileDrop">			<div id="Text">				Drop a midi file here			</div>			<input type="file" accept="audio/midi">		</div>		<div id="Results">			<textarea id="ResultsText" style="width:0px;height:0px;visibility: hidden;" placeholder="json output..."></textarea>		</div>		<tone-play-toggle disabled></tone-play-toggle>	</tone-content>';
+		container.appendChild(this._divImportar);
+
+		if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+			document.querySelector("#FileDrop #Text").textContent = "Reading files not supported by this browser";
+		} else {
+
+			const fileDrop = document.querySelector("#FileDrop")
+
+			fileDrop.addEventListener("dragenter", () => fileDrop.classList.add("Hover"))
+
+			fileDrop.addEventListener("dragleave", () => fileDrop.classList.remove("Hover"))
+
+			fileDrop.addEventListener("drop", () => fileDrop.classList.remove("Hover"))
+
+			document.querySelector("#FileDrop input").addEventListener("change", e => {
+				//get the files
+				const files = e.target.files
+				if (files.length > 0){
+					const file = files[0]
+					document.querySelector("#FileDrop #Text").textContent = file.name
+					parseFile(file)
+				}
+			})
+		}
+
+		let currentMidi = null
+
+		function parseFile(file){
+			//read the file
+			const reader = new FileReader()
+			reader.onload = function(e){
+				const midi = new Midi(e.target.result)
+				document.querySelector("#ResultsText").value = JSON.stringify(midi, undefined, 2)
+				document.querySelector('tone-play-toggle').removeAttribute('disabled')
+				currentMidi = midi
+				midiExportar = currentMidi
+				
+				//localStorage.setItem('midi', JSON.stringify(currentMidi));
+			}
+			reader.readAsArrayBuffer(file)
+		}
+
+		const synths = []
+		document.querySelector('tone-play-toggle').addEventListener('play', (e) => {
+			const playing = e.detail
+			if (playing && currentMidi){
+				alert(currentMidi.tracks);
+				const now = Tone.now() + 0.5
+				currentMidi.tracks.forEach(track => {
+					//create a synth for each track
+					const synth = new Tone.PolySynth(10, Tone.Synth, {
+						envelope : {
+							attack : 0.02,
+							decay : 0.1,
+							sustain : 0.3,
+							release : 1
+						}
+					}).toMaster()
+					synths.push(synth)
+					//schedule all of the events
+					track.notes.forEach(note => {
+						synth.triggerAttackRelease(note.name, note.duration, note.time + now, note.velocity)
+					})
+				})
+			} else {
+				//dispose the synth and make a new one
+				while(synths.length){
+					const synth = synths.shift()
+					synth.dispose()
+				}
+			}
+		})
+
+
+
+
+
+		//fin inportar midi-------------------------------
 
 		//botones de octavas
 		
@@ -140,16 +226,6 @@ export class About extends events.EventEmitter{
 		this._playButton.classList.add('visible')
 		video.appendChild(this._playButton)
 
-		/*YouTubeIframeLoader.load((YT) => {
-			this._ytplayer = new YT.Player('youtube-iframe', {
-				events : {
-					onStateChange : (state) => {
-						this._playButton.classList.remove('visible')
-					}
-				}
-			})
-		})*/
-
 		const blurb = document.createElement('div')
 		blurb.id = 'blurb'
 		content.appendChild(blurb)
@@ -158,42 +234,17 @@ export class About extends events.EventEmitter{
 	}
 	close(){
 		
-		//this.cantidad.classList.remove('close')
-		//this.cantidad.classList.add('open')
-
-		//this._BotonMenos.classList.remove('close')
-		//this._BotonMenos.classList.add('open')
-
-		//this._BotonMas.classList.remove('close')
-		//this._BotonMas.classList.add('open')
-
 		this._toggleButton.classList.remove('close')
 		this._toggleButton.classList.add('open')
 
 		this._container.classList.remove('visible')
 
-		/*if (this._ytplayer && this._ytplayer.stopVideo){
-			this._ytplayer.stopVideo()
-		}*/
-		//this.emit('close')
 		if (window.ga){
 			ga('send', 'event', 'AI-Duet', 'Click', 'About - Close')
 		}
 	}
 	open(play=false){
 		
-		/*this._toggleButton.classList.add('close')
-		this._toggleButton.classList.remove('open')
-
-		this._playButton.classList.add('visible')
-		this._container.classList.add('visible')
-		this.emit('open')
-		if (window.ga){
-			ga('send', 'event', 'AI-Duet', 'Click', 'About - Open')
-		}
-		if (play){
-			this._playVideo()
-		}*/
 		this.emit('open')
 	}
 	// waits until the player is ready to play the video, 
@@ -216,5 +267,11 @@ export class About extends events.EventEmitter{
 		this._BotonMasOctava.classList.add('show')
 		this._BotonMenos.classList.add('show')
 		this.cantidad.classList.add('show')
+		this._divImportar.classList.add('show')
 	}
+	
+	
+}
+export function funcion() {
+	return midiExportar;
 }

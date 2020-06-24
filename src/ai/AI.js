@@ -18,7 +18,7 @@ import Tone from 'Tone/core/Tone'
 //import {MidiConvert} from 'midiconvert'
 //import { Midi as MidiConvert } from '@tonejs/midi'
 import events from 'events'
-
+import { funcion } from "../interface/About.js";
 class AI extends events.EventEmitter{
 	
 	constructor(){
@@ -49,14 +49,15 @@ class AI extends events.EventEmitter{
 		this._track = this._midi.track()
 		//this._track = this._midi.addTrack()
 	}
-
+	
 	send(){
 		var element = document.getElementById("cantidad");
 		var valor=element.textContent;
 
-		//alert(this.guardarNotas.length+"-notas-"+this.guardarNotas.notes);
-		
-		//trim the track to the first note
+		this.tocarMidi();
+		return;
+
+
 		if (this._track.length||this.guardarNotas !== undefined){
 			
 			if (!this._track.length){
@@ -84,6 +85,11 @@ class AI extends events.EventEmitter{
 						var note_transpose=Tone.Frequency(chord_transpose).toMidi();
 						this._aiEndTime = note.noteOn + now
 						this.emit('keyDown', note_transpose, (note.noteOn  ) + (now-this._firstPhrase ))
+						console.log("--------------------------")
+						console.log("note.noteOn = "+note.noteOn )
+						console.log("now = "+now)
+						console.log("this._firstPhrase = "+this._firstPhrase)
+
 						note.duration = note.duration * 0.9
 						note.duration = Math.min(note.duration, 4)
 						this.emit('keyUp', note_transpose, ( note.noteOff ) + (now-this._firstPhrase ))
@@ -100,19 +106,7 @@ class AI extends events.EventEmitter{
 			let additional = endTime
 			additional = Math.min(additional, 8)
 			additional = Math.max(additional, 1)
-			//console.log(request)
-			/*request.load(`./predict?duration=${endTime + additional}`, JSON.stringify(request.toArray()), 'POST').then((response) => {
-				response.slice(endTime / 2).tracks[1].notes.forEach((note) => {
-					const now = Tone.now() + 0.05
-					if (note.noteOn + now > this._aiEndTime){
-						this._aiEndTime = note.noteOn + now
-						this.emit('keyDown', note.midi, note.noteOn + now)
-						note.duration = note.duration * 0.9
-						note.duration = Math.min(note.duration, 4)
-						this.emit('keyUp', note.midi, note.noteOff + now)
-					}
-				})
-			})*/
+			
 			this._lastPhrase = -1
 			this.emit('sent')
 		}
@@ -146,6 +140,49 @@ class AI extends events.EventEmitter{
 			}
 		}
 	}
+	tocarMidi(){
+		var element = document.getElementById("cantidad");
+		var valor=element.textContent;
+
+		var midiImportado=null;
+		midiImportado=funcion();
+		
+		if(midiImportado!=null){
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+				//const now = Tone.now() + 0.5
+				midiImportado.tracks.forEach(track => {
+				//console.log("UN TRACK");
+				this.init();
+				this._newTrack();
+				this._track=null;
+				this._track=track;
+				
+				
+				this._track.notes.forEach((note) => {
+						//alert("una nota");
+						console.log("NOTA:"+JSON.stringify(note));						
+						const now = Tone.now() + 0.05
+									
+						var chord=Tone.Frequency(note.midi, 'midi').toNote();
+						var chord_transpose=Tone.Frequency(chord).transpose(valor).toNote();//3 semitonos
+						//vuelta a midi
+						var note_transpose=Tone.Frequency(chord_transpose).toMidi();
+						this._aiEndTime = note.noteOn + now
+						this.emit('keyDown', note_transpose, now+note.time)
+						note.duration = note.duration * 0.9
+						note.duration = Math.min(note.duration, 4)
+						this.emit('keyUp', note_transpose, now+note.time)
+							
+					})
+			})			
+			
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		}else{
+			alert("midi es null");
+		}
+	}
+	
 }
 
 export {AI}
