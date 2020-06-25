@@ -55,12 +55,12 @@ class AI extends events.EventEmitter{
 		var valor=element.textContent;
 
 		var midiImportadoo=null;
-		midiImportadoo=funcion();
+		midiImportadoo=funcion();     //saco el midi del About.js
 
-		if(midiImportadoo!=null){
+		if(midiImportadoo!=null){ //si el midi tiene algo toco el midi
 			this.tocarMidi();
 			return;
-		}else{
+		}else{	//sino transporto normalmente
 
 		if (this._track.length||this.guardarNotas !== undefined){
 			
@@ -154,16 +154,16 @@ class AI extends events.EventEmitter{
 		if(midiImportado!=null){
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-				//const now = Tone.now() + 0.5
+				//por cada track que tenga el midi
 				midiImportado.tracks.forEach(track => {
-				//console.log("UN TRACK");
+				
 				if(contTracks<maxTracks){
 					this.init();
 					this._newTrack();
 					this._track=null;
 					this._track=track;
 					
-					
+					//por cada nota
 					this._track.notes.forEach((note) => {							
 							this.tocarNota(note)		
 						})
