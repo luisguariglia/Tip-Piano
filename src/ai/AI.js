@@ -54,9 +54,13 @@ class AI extends events.EventEmitter{
 		var element = document.getElementById("cantidad");
 		var valor=element.textContent;
 
-		this.tocarMidi();
-		return;
+		var midiImportadoo=null;
+		midiImportadoo=funcion();
 
+		if(midiImportadoo!=null){
+			this.tocarMidi();
+			return;
+		}else{
 
 		if (this._track.length||this.guardarNotas !== undefined){
 			
@@ -110,6 +114,7 @@ class AI extends events.EventEmitter{
 			this._lastPhrase = -1
 			this.emit('sent')
 		}
+	}
 	}
 
 	keyDown(note, time=Tone.now()){

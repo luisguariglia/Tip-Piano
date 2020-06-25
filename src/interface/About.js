@@ -44,8 +44,7 @@ export class About extends events.EventEmitter{
 		//importar midi--------------------------------
 
 		this._divImportar = document.createElement('div');
-		this._divImportar.id='divImportar';
-		this._divImportar.classList.add('open');
+		this._divImportar.id='divImportar';	
 		this._divImportar.innerHTML=`
 		<div class="divContenido">	
 					
@@ -61,7 +60,7 @@ export class About extends events.EventEmitter{
 			<tone-play-toggle disabled></tone-play-toggle>	
 
 		</div>`;
-
+		this._divImportar.classList.add('open');
 		container.appendChild(this._divImportar);
 
 		if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
