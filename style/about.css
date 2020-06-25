@@ -18,10 +18,10 @@
 #divImportar {
 	$closeSize : 40px;
 	position: absolute;
-	top: 15px;
-	left: 300px;
-	width: 500px;
-	height: 300px;
+	top: 0px;
+	left: 120px;
+	/*width: 500px;
+	height: 300px;*/
 	cursor: pointer;
 	z-index: 1000;
 	transition: transform 0.1s;
@@ -258,7 +258,7 @@
 
 	#content {
 		width: 90%;
-		margin: 50px auto 30px auto;
+		/*margin: 50px auto 30px auto;*/
 		min-width: 300px;
 		max-width: 800px;
 		height: auto;
@@ -271,7 +271,7 @@
 			font-family: $font-family;
 			font-size: 40px;
 			line-height: 30px;
-			margin: 20px 0px 30px 0px;
+			/*margin: 20px 0px 30px 0px;*/
 			position: relative;
 		}
 
@@ -342,10 +342,10 @@
 #FileDrop{
 	position: relative;
 	width: 100%;
-	height: 100px;
+	height: 50px;
 	border: 2px dashed black;
 	color: black;
-	margin: 20px auto;
+	margin: 0px;
 }
 
 #FileDrop.Hover{
@@ -387,18 +387,16 @@ textarea {
 	width: 100%;
 	margin: 10px auto;
 }
-
-#Description {
-	position: relative;
-	width: 100%;
-	text-align: center;
-	height: 40px;
-	font-size: 16px;
-	margin: 10px auto;
-	font-family: sans-serif;
+.divContenido{
+	margin-top: 17px;
+	width: 200px;
 }
 
 tone-play-toggle {
+	width: 10px;
+	position: absolute;
+	right: -100px;
+	top: 5px;
 	margin-top: 10px;
 }
 

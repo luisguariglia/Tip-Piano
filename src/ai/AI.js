@@ -165,14 +165,14 @@ class AI extends events.EventEmitter{
 						const now = Tone.now() + 0.05
 									
 						var chord=Tone.Frequency(note.midi, 'midi').toNote();
-						var chord_transpose=Tone.Frequency(chord).transpose(valor).toNote();//3 semitonos
+						var chord_transpose=Tone.Frequency(chord).transpose(valor).toNote();
 						//vuelta a midi
 						var note_transpose=Tone.Frequency(chord_transpose).toMidi();
 						this._aiEndTime = note.noteOn + now
 						this.emit('keyDown', note_transpose, now+note.time)
 						note.duration = note.duration * 0.9
 						note.duration = Math.min(note.duration, 4)
-						this.emit('keyUp', note_transpose, now+note.time)
+						this.emit('keyUp', note_transpose, now+note.time+note.duration)
 							
 					})
 			})			

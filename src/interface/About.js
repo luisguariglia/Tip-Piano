@@ -46,7 +46,22 @@ export class About extends events.EventEmitter{
 		this._divImportar = document.createElement('div');
 		this._divImportar.id='divImportar';
 		this._divImportar.classList.add('open');
-		this._divImportar.innerHTML='<tone-content>		<div id="Description">Parse a MIDI file into a Tone.js-friendly JSON format.</div>		<div id="FileDrop">			<div id="Text">				Drop a midi file here			</div>			<input type="file" accept="audio/midi">		</div>		<div id="Results">			<textarea id="ResultsText" style="width:0px;height:0px;visibility: hidden;" placeholder="json output..."></textarea>		</div>		<tone-play-toggle disabled></tone-play-toggle>	</tone-content>';
+		this._divImportar.innerHTML=`
+		<div class="divContenido">	
+					
+			<div id="FileDrop">			
+				<div id="Text">				
+					Arrastre archivo midi aquí	
+				</div>			
+				<input type="file" accept="audio/midi">		
+			</div>		
+			<div id="Results">			
+				<textarea id="ResultsText" style="width:0px;height:0px;visibility: hidden;" placeholder="json output..."></textarea>		
+			</div>		
+			<tone-play-toggle disabled></tone-play-toggle>	
+
+		</div>`;
+
 		container.appendChild(this._divImportar);
 
 		if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
@@ -93,7 +108,7 @@ export class About extends events.EventEmitter{
 		document.querySelector('tone-play-toggle').addEventListener('play', (e) => {
 			const playing = e.detail
 			if (playing && currentMidi){
-				alert(currentMidi.tracks);
+				//alert(currentMidi.tracks);
 				const now = Tone.now() + 0.5
 				currentMidi.tracks.forEach(track => {
 					//create a synth for each track
