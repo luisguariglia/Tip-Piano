@@ -145,10 +145,9 @@ class AI extends events.EventEmitter{
 			}
 		}
 	}
-	tocarMidi(){
-		var element = document.getElementById("cantidad");
-		var valor=element.textContent;
-
+	tocarMidi(){		
+		var maxTracks=5;
+		var contTracks=0;
 		var midiImportado=null;
 		midiImportado=funcion();
 		
@@ -158,34 +157,44 @@ class AI extends events.EventEmitter{
 				//const now = Tone.now() + 0.5
 				midiImportado.tracks.forEach(track => {
 				//console.log("UN TRACK");
-				this.init();
-				this._newTrack();
-				this._track=null;
-				this._track=track;
-				
-				
-				this._track.notes.forEach((note) => {
-						//alert("una nota");
-						console.log("NOTA:"+JSON.stringify(note));						
-						const now = Tone.now() + 0.05
-									
-						var chord=Tone.Frequency(note.midi, 'midi').toNote();
-						var chord_transpose=Tone.Frequency(chord).transpose(valor).toNote();
-						//vuelta a midi
-						var note_transpose=Tone.Frequency(chord_transpose).toMidi();
-						this._aiEndTime = note.noteOn + now
-						this.emit('keyDown', note_transpose, now+note.time)
-						note.duration = note.duration * 0.9
-						note.duration = Math.min(note.duration, 4)
-						this.emit('keyUp', note_transpose, now+note.time+note.duration)
-							
-					})
+				if(contTracks<maxTracks){
+					this.init();
+					this._newTrack();
+					this._track=null;
+					this._track=track;
+					
+					
+					this._track.notes.forEach((note) => {							
+							this.tocarNota(note)		
+						})
+					contTracks++;
+				}else{
+					return;
+				}
 			})			
 			
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		}else{
 			alert("midi es null");
 		}
+	}
+	tocarNota(note){
+		var element = document.getElementById("cantidad");
+		var valor=element.textContent;
+		//console.log("una nota");
+		//console.log("NOTA:"+JSON.stringify(note));						
+		const now = Tone.now() + 0.05
+										
+		var chord=Tone.Frequency(note.midi, 'midi').toNote();
+		var chord_transpose=Tone.Frequency(chord).transpose(valor).toNote();
+		//vuelta a midi
+		var note_transpose=Tone.Frequency(chord_transpose).toMidi();
+		this._aiEndTime = note.noteOn + now
+		this.emit('keyDown', note_transpose, now+note.time)
+		//note.duration = note.duration * 0.9
+		//note.duration = Math.min(note.duration, 4)
+		this.emit('keyUp', note_transpose, now+note.time+note.duration)  //este anda bien
+		//this.emit('keyUp', note_transpose, now+note.time)
 	}
 	
 }
