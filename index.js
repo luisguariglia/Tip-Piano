@@ -16,8 +16,24 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+io.on('connection', (socket) => {
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);             //muestro en consola
+  });
 });
 
+io.on('connection', (socket) => {
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);                   //mando el mensaje a todos y a mi
+  });
+});/*
+io.on('connection', (socket) => {               //mando mensajes a todos menos a mi
+  socket.broadcast.emit('hi');
+});*/
 http.listen(3000, () => {
   console.log('listening on *:3000');
 });
