@@ -41,6 +41,7 @@ export class About extends events.EventEmitter{
 		this._container.id = 'about'
 		container.appendChild(this._container)
 
+		
 		//importar midi--------------------------------
 
 		this._divImportar = document.createElement('div');
@@ -134,10 +135,6 @@ export class About extends events.EventEmitter{
 			}
 		})
 
-
-
-
-
 		//fin inportar midi-------------------------------
 
 		//botones de octavas
@@ -201,9 +198,21 @@ export class About extends events.EventEmitter{
 				//this.open()
 			}
 		})
-		
-		
 		//
+		////////////////////////mostrar mensajes----------------------------
+		this._divMensajes = document.createElement('div');
+		this._divMensajes.id='divMensajes';	
+		this._divMensajes.innerHTML=`
+			<ul id="messages">Mensajes:</ul>
+			<form action="">
+			<input id="m" autocomplete="off" /><button>Send</button>
+			</form>
+			`;
+		this._divMensajes.classList.add('open');
+		container.appendChild(this._divMensajes);
+		////////////////////////fin mensajes--------------------------------
+
+
 		this._toggleButton = document.createElement('div')
 		this._toggleButton.id = 'aboutButton'
 		this._toggleButton.classList.add('open')
@@ -282,6 +291,7 @@ export class About extends events.EventEmitter{
 		this._BotonMenos.classList.add('show')
 		this.cantidad.classList.add('show')
 		this._divImportar.classList.add('show')
+		this._divMensajes.classList.add('show')
 	}
 	
 	
