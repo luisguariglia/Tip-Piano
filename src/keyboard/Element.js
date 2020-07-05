@@ -126,21 +126,26 @@ class KeyboardElement extends events.EventEmitter {
 	}
 
 	keyDown(noteNum, ai=false){
+		
 		// console.log('down', noteNum, ai)
 		if (this._keys.hasOwnProperty(noteNum)){
 			const key = this._keys[noteNum]
 			key.classList.remove('hover')
 
 			const note = new Note(key.querySelector('#fill'), ai)
-
+			this.enviar(note);
 			const noteArray = ai ? this._aiNotes : this._notes
 			if (!noteArray[noteNum]){
 				noteArray[noteNum] = []
 			}
 			noteArray[noteNum].push(note)
+			
 		}
 	}
-
+	enviar(nota){
+		var socket = io();
+		socket.emit('chat message',"toco nota");
+	}
 	keyUp(noteNum, ai=false){
 		// console.log('up', noteNum, ai)
 		if (this._keys.hasOwnProperty(noteNum)){

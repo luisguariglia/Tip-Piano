@@ -10,8 +10,11 @@ app.use("/audio/Salamander", express.static(__dirname + '/audio/Salamander'));
 app.use("/audio/string_ensemble", express.static(__dirname + '/audio/string_ensemble'));
 
 
-app.get('/', (req, res) => {
+app.get('/server', (req, res) => {
   res.sendFile(__dirname + '/index.html');
+});
+app.get('/user', (req, res) => {
+  res.sendFile(__dirname + '/user.html');
 });
 
 io.on('connection', (socket) => {
@@ -35,5 +38,5 @@ io.on('connection', (socket) => {               //mando mensajes a todos menos a
   socket.broadcast.emit('hi');
 });*/
 http.listen(3000, () => {
-  console.log('listening on *:3000');
+  console.log('listening on *:3000/server and *:3000/user');
 });

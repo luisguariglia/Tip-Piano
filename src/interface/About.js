@@ -200,7 +200,7 @@ export class About extends events.EventEmitter{
 		})
 		//
 		////////////////////////mostrar mensajes----------------------------
-		this._divMensajes = document.createElement('div');
+		/*this._divMensajes = document.createElement('div');
 		this._divMensajes.id='divMensajes';	
 		this._divMensajes.innerHTML=`
 			<ul id="messages">Mensajes:</ul>
@@ -209,7 +209,7 @@ export class About extends events.EventEmitter{
 			</form>
 			`;
 		this._divMensajes.classList.add('open');
-		container.appendChild(this._divMensajes);
+		container.appendChild(this._divMensajes);*/
 		////////////////////////fin mensajes--------------------------------
 
 
@@ -291,7 +291,7 @@ export class About extends events.EventEmitter{
 		this._BotonMenos.classList.add('show')
 		this.cantidad.classList.add('show')
 		this._divImportar.classList.add('show')
-		this._divMensajes.classList.add('show')
+		/*this._divMensajes.classList.add('show')*/
 	}
 	
 	
