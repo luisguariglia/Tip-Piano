@@ -133,7 +133,7 @@ class KeyboardElement extends events.EventEmitter {
 			key.classList.remove('hover')
 
 			const note = new Note(key.querySelector('#fill'), ai)
-			this.enviar(note);
+			this.enviar(noteNum);
 			const noteArray = ai ? this._aiNotes : this._notes
 			if (!noteArray[noteNum]){
 				noteArray[noteNum] = []
@@ -144,7 +144,7 @@ class KeyboardElement extends events.EventEmitter {
 	}
 	enviar(nota){
 		var socket = io();
-		socket.emit('chat message',"toco nota");
+		socket.emit('chat message',nota);
 	}
 	keyUp(noteNum, ai=false){
 		// console.log('up', noteNum, ai)
