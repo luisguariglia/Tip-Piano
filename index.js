@@ -8,7 +8,7 @@ app.use("/midi", express.static(__dirname + '/node_modules/midiconvert/build'));
 app.use("/images", express.static(__dirname + './images'));
 app.use("/audio/Salamander", express.static(__dirname + '/audio/Salamander'));
 app.use("/audio/string_ensemble", express.static(__dirname + '/audio/string_ensemble'));
-
+app.use("/", express.static(__dirname + '/'));
 
 app.get('/server', (req, res) => {
   res.sendFile(__dirname + '/index.html');

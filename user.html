@@ -11,18 +11,33 @@
         #messages li { padding: 5px 10px; }
         #messages li:nth-child(odd) { background: #eee; }
       </style>
+      <script type="text/javascript" src="https://unpkg.com/tone@13.4.9/build/Tone.js"></script>
+      <script type="text/javascript" src="https://unpkg.com/@tonejs/ui@0.0.8/build/tonejs-ui.js"></script>
+      <script type="text/javascript" src="https://unpkg.com/@tonejs/midi"></script>
+      <style>
+        #container {
+          width: 100vw;
+          height: 100vh;
+          background: yellow;
+        }
+      </style>
 </head>
 <body>
-    <ul id="messages"></ul>
+  <div id ="container">
+  </div>
+    <!--<ul id="messages"></ul>-->
     <script src="/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		$(function () {
 		  var socket = io();
 		  socket.on('chat message', function(msg){
-			$('#messages').append($('<li>').text(msg));
+      /*$('#messages').append($('<li>').text(msg));*/
+      tocar(msg);
 		  });
 		});
-	</script>
+  </script>
+  
+	<script src="/user.js"></script>
 </body>
 </html>
