@@ -20,9 +20,29 @@
           height: 100vh;
           background: yellow;
         }
+        .slide{
+          width: 90%;;
+          margin-left: 4%;
+          margin-right: 4%;
+        }
+        .slide:hover {
+          opacity: 1;
+        }
       </style>
 </head>
 <body>
+  <button onclick="tocar(64)" style="width: 500px; height: 200px; margin-left: 40%;"></button>
+  <button onclick="tocar(65)" style="width: 500px; height: 200px; margin-left: 40%;"></button>
+
+  <p>attack:</p>
+  <input class="slide" id="attack" type="range" min="0" max="100" value="5">
+  <p>decay:</p>
+  <input class="slide" id="decay" type="range" min="0" max="100" value="20">
+  <p>sustain:</p>
+  <input class="slide" id="sustain" type="range" min="0" max="100" value="10">
+  <p>release:</p>
+  <input class="slide" id="release" type="range" min="0" max="100" value="8">
+
   <div id ="container">
   </div>
     <!--<ul id="messages"></ul>-->

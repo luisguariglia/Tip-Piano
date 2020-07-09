@@ -1,10 +1,18 @@
 function tocar(nota){
-/*const synth = new Tone.MembraneSynth().toMaster();
+    var attack = document.getElementById("attack").value/100;   
+    var decay = document.getElementById("decay").value/100;   
+    var sustain = document.getElementById("sustain").value/100;   
+    var release = document.getElementById("release").value/100;   
 
-synth.triggerAttackRelease("C2", "8n");*/
-var synth = new Tone.Synth().toMaster();
-synth.triggerAttackRelease(Tone.Frequency(nota, "midi").toNote(), "8n");
-visual(nota);
+    var ampEnv = new Tone.AmplitudeEnvelope({
+        "attack": attack,
+        "decay": decay,
+        "sustain": sustain,
+        "release": release
+    }).toMaster();
+    
+    var osc = new Tone.Oscillator(Tone.Frequency(nota, "midi")).connect(ampEnv).start();
+    ampEnv.triggerAttackRelease("8n");
 }
 
 function visual(nota) {
