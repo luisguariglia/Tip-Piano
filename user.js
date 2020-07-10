@@ -7,7 +7,10 @@ function tocar(nota){
   var maxDelay = document.getElementById("maxDelay").value/100;
   var frequency = document.getElementById("frequency").value/10;   
   var depth = document.getElementById("depth").value/10;  
-     
+   
+  var duracion =document.getElementById("duracion").value/10;  
+  var octava =document.getElementById("octava").value;  
+
   var freeverb = new Tone.Freeverb().toMaster();
   freeverb.dampening.value = 200;
 
@@ -30,8 +33,11 @@ function tocar(nota){
       "release": release
   }).toMaster();
   
-  var osc = new Tone.Oscillator(Tone.Frequency(nota, "midi")).chain(vibrato,ampEnv).start();
-  ampEnv.triggerAttackRelease("4n");
+  var notaFinal=nota;
+  notaFinal=notaFinal+(12*octava);
+  var osc = new Tone.Oscillator(Tone.Frequency(notaFinal, "midi")).chain(vibrato,ampEnv).start();
+  ampEnv.triggerAttackRelease(duracion);
+  visual(nota);
 }
 function actualizar() {
   var attack = document.getElementById("attack").value/100;   
@@ -51,6 +57,9 @@ function actualizar() {
   document.getElementById("maxDelayShow").innerHTML=maxDelay;   
   document.getElementById("frequencyShow").innerHTML=frequency;   
   document.getElementById("depthShow").innerHTML=depth;   
+
+  var duracion =document.getElementById("duracion").value;  
+  document.getElementById("duracionShow").innerHTML=duracion;   
 
 }
 function visual(nota) {

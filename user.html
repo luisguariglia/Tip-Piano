@@ -15,9 +15,7 @@
       <script type="text/javascript" src="https://unpkg.com/@tonejs/ui@0.0.8/build/tonejs-ui.js"></script>
       <script type="text/javascript" src="https://unpkg.com/@tonejs/midi"></script>
       <style>
-        #container {
-          width: 100vw;
-          height: 100vh;
+        body {
           background: yellow;
         }
         .slide{
@@ -30,45 +28,63 @@
         }
         .opciones{
           margin: 5%;
-          padding: 5% ;
+          padding: 1% ;
           border: black;
           border-style: solid;
+          max-width: 750px;
+          /*background-color: rgba(255, 255, 255, 0.9);*/
+          box-shadow: 0px 0px 5px black;
         }
         .separador{
+          margin-top: 5px;
+          margin-bottom: 5px;
           width: 100%;
           height: 2px;
-          background-color: rgb(105, 115, 161);
+          background-color: rgba(105, 115, 161, 0.493)
+        }
+        p{
+          display: inline-block;
+          vertical-align: top;
+        }
+        .value{
+          font-weight: bold;
         }
       </style>
 </head>
-<body onload="actualizar()">
-  <button onclick="tocar(64)" style="width: 50px; height: 20px; margin-left: 40%;"></button>
-  <button onclick="tocar(65)" style="width: 50px; height: 20px; margin-left: 40%;"></button>
+<body onload="actualizar()"  id ="container">
+  <!--<button onclick="tocar(64)" style="width: 50px; height: 20px; margin-left: 40%;"></button>
+  <button onclick="tocar(65)" style="width: 50px; height: 20px; margin-left: 40%;"></button>-->
   <div class="opciones">
+    <h2 style="text-align: center;">Modificadores</h2>
 
-    <h5>AmplitudeEnvelope</h5>
-    <p>attack:</p>
-    <input oninput="actualizar()" class="slide" id="attack" type="range" min="0" max="100" value="5"><p id="attackShow" class="value"></p>
-    <p>decay:</p>
-    <input oninput="actualizar()" class="slide" id="decay" type="range" min="0" max="100" value="20"><p id="decayShow" class="value"></p>
-    <p>sustain:</p>
-    <input oninput="actualizar()" class="slide" id="sustain" type="range" min="0" max="100" value="10"><p id="sustainShow" class="value"></p>
-    <p>release:</p>
-    <input oninput="actualizar()" class="slide" id="release" type="range" min="0" max="100" value="8"><p id="releaseShow" class="value"></p>
+    <div class="separador"></div>
+
+    <h3>AmplitudeEnvelope</h3><br>
+    <p>attack: </p><p id="attackShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="attack" type="range" min="0" max="100" value="5">
+    <p>decay: </p><p id="decayShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="decay" type="range" min="0" max="100" value="20">
+    <p>sustain: </p><p id="sustainShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="sustain" type="range" min="0" max="100" value="10">
+    <p>release: </p><p id="releaseShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="release" type="range" min="0" max="100" value="8">
     
     <div class="separador"></div>
     
-    <h5>Vibrato</h5>
-    <p>attack:</p>
-    <input oninput="actualizar()" class="slide" id="maxDelay" type="range" min="0" max="100" value="0.05"><p id="maxDelayShow" class="value"></p>
-    <p>frequency:</p>
-    <input oninput="actualizar()" class="slide" id="frequency" type="range" min="0" max="100" value="5"><p id="frequencyShow" class="value"></p>
-    <p>depth:</p>
-    <input oninput="actualizar()" class="slide" id="depth" type="range" min="0" max="100" value="0.1"><p id="depthShow" class="value"></p>
+    <h3>Vibrato</h3><br>
+    <p>attack: </p><p id="maxDelayShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="maxDelay" type="range" min="0" max="100" value="0.5">
+    <p>frequency: </p><p id="frequencyShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="frequency" type="range" min="0" max="100" value="5">
+    <p>depth: </p><p id="depthShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="depth" type="range" min="0" max="100" value="0.1">
+    <div class="separador"></div>
+    <p>Duración de nota: </p><p id="duracionShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="duracion" type="range" min="1" max="10" value="4">
+    <p>Octava: </p><p id="octavaShow" class="value"></p>
+    <input oninput="actualizar()" class="slide" id="octava" type="range" min="-2" max="2" value="0">
+  </div>
 
-  </div>
-  <div id ="container">
-  </div>
     <script src="/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
