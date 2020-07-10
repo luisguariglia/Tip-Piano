@@ -28,31 +28,53 @@
         .slide:hover {
           opacity: 1;
         }
+        .opciones{
+          margin: 5%;
+          padding: 5% ;
+          border: black;
+          border-style: solid;
+        }
+        .separador{
+          width: 100%;
+          height: 2px;
+          background-color: rgb(105, 115, 161);
+        }
       </style>
 </head>
-<body>
-  <button onclick="tocar(64)" style="width: 500px; height: 200px; margin-left: 40%;"></button>
-  <button onclick="tocar(65)" style="width: 500px; height: 200px; margin-left: 40%;"></button>
+<body onload="actualizar()">
+  <button onclick="tocar(64)" style="width: 50px; height: 20px; margin-left: 40%;"></button>
+  <button onclick="tocar(65)" style="width: 50px; height: 20px; margin-left: 40%;"></button>
+  <div class="opciones">
 
-  <p>attack:</p>
-  <input class="slide" id="attack" type="range" min="0" max="100" value="5">
-  <p>decay:</p>
-  <input class="slide" id="decay" type="range" min="0" max="100" value="20">
-  <p>sustain:</p>
-  <input class="slide" id="sustain" type="range" min="0" max="100" value="10">
-  <p>release:</p>
-  <input class="slide" id="release" type="range" min="0" max="100" value="8">
+    <h5>AmplitudeEnvelope</h5>
+    <p>attack:</p>
+    <input oninput="actualizar()" class="slide" id="attack" type="range" min="0" max="100" value="5"><p id="attackShow" class="value"></p>
+    <p>decay:</p>
+    <input oninput="actualizar()" class="slide" id="decay" type="range" min="0" max="100" value="20"><p id="decayShow" class="value"></p>
+    <p>sustain:</p>
+    <input oninput="actualizar()" class="slide" id="sustain" type="range" min="0" max="100" value="10"><p id="sustainShow" class="value"></p>
+    <p>release:</p>
+    <input oninput="actualizar()" class="slide" id="release" type="range" min="0" max="100" value="8"><p id="releaseShow" class="value"></p>
+    
+    <div class="separador"></div>
+    
+    <h5>Vibrato</h5>
+    <p>attack:</p>
+    <input oninput="actualizar()" class="slide" id="maxDelay" type="range" min="0" max="100" value="0.05"><p id="maxDelayShow" class="value"></p>
+    <p>frequency:</p>
+    <input oninput="actualizar()" class="slide" id="frequency" type="range" min="0" max="100" value="5"><p id="frequencyShow" class="value"></p>
+    <p>depth:</p>
+    <input oninput="actualizar()" class="slide" id="depth" type="range" min="0" max="100" value="0.1"><p id="depthShow" class="value"></p>
 
+  </div>
   <div id ="container">
   </div>
-    <!--<ul id="messages"></ul>-->
     <script src="/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		$(function () {
 		  var socket = io();
 		  socket.on('chat message', function(msg){
-      /*$('#messages').append($('<li>').text(msg));*/
       tocar(msg);
 		  });
 		});

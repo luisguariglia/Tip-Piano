@@ -1,20 +1,58 @@
 function tocar(nota){
-    var attack = document.getElementById("attack").value/100;   
-    var decay = document.getElementById("decay").value/100;   
-    var sustain = document.getElementById("sustain").value/100;   
-    var release = document.getElementById("release").value/100;   
+  var attack = document.getElementById("attack").value/100;   
+  var decay = document.getElementById("decay").value/100;   
+  var sustain = document.getElementById("sustain").value/100;   
+  var release = document.getElementById("release").value/100; 
 
-    var ampEnv = new Tone.AmplitudeEnvelope({
-        "attack": attack,
-        "decay": decay,
-        "sustain": sustain,
-        "release": release
-    }).toMaster();
-    
-    var osc = new Tone.Oscillator(Tone.Frequency(nota, "midi")).connect(ampEnv).start();
-    ampEnv.triggerAttackRelease("8n");
+  var maxDelay = document.getElementById("maxDelay").value/100;
+  var frequency = document.getElementById("frequency").value/10;   
+  var depth = document.getElementById("depth").value/10;  
+     
+  var freeverb = new Tone.Freeverb().toMaster();
+  freeverb.dampening.value = 200;
+
+  var vibrato =new Tone.Vibrato({
+    maxDelay : maxDelay ,
+    frequency : frequency ,
+    depth : depth ,
+    type : "sine"
+  }); 
+  var phaser = new Tone.Phaser({
+    "frequency" : 15,
+    "octaves" : 1,
+    "baseFrequency" : 500
+  }).toMaster();
+  
+  var ampEnv = new Tone.AmplitudeEnvelope({
+      "attack": attack,
+      "decay": decay,
+      "sustain": sustain,
+      "release": release
+  }).toMaster();
+  
+  var osc = new Tone.Oscillator(Tone.Frequency(nota, "midi")).chain(vibrato,ampEnv).start();
+  ampEnv.triggerAttackRelease("4n");
 }
+function actualizar() {
+  var attack = document.getElementById("attack").value/100;   
+  var decay = document.getElementById("decay").value/100;   
+  var sustain = document.getElementById("sustain").value/100;   
+  var release = document.getElementById("release").value/100;
 
+  document.getElementById("attackShow").innerHTML=attack;   
+  document.getElementById("decayShow").innerHTML=decay;   
+  document.getElementById("sustainShow").innerHTML=sustain;   
+  document.getElementById("releaseShow").innerHTML=release;   
+
+  var maxDelay = document.getElementById("maxDelay").value/100;   
+  var frequency = document.getElementById("frequency").value/10;   
+  var depth = document.getElementById("depth").value/10; 
+
+  document.getElementById("maxDelayShow").innerHTML=maxDelay;   
+  document.getElementById("frequencyShow").innerHTML=frequency;   
+  document.getElementById("depthShow").innerHTML=depth;   
+
+}
 function visual(nota) {
     var randomColor = Math.floor(Math.random()*16777215).toString(16);
     var elem = document.getElementById("container");   
