@@ -59,7 +59,10 @@ function actualizar() {
   document.getElementById("depthShow").innerHTML=depth;   
 
   var duracion =document.getElementById("duracion").value;  
-  document.getElementById("duracionShow").innerHTML=duracion;   
+  document.getElementById("duracionShow").innerHTML=duracion;  
+  
+  var octava =document.getElementById("octava").value;  
+  document.getElementById("octavaShow").innerHTML=octava;  
 
 }
 function visual(nota) {
@@ -109,4 +112,24 @@ function visual(nota) {
         default:
             elem.style.backgroundColor="#"+((1<<24)*Math.random()|0).toString(16);
       }
+}
+function random() {
+  var attack = document.getElementById("attack").value=getRandomFloat(0,100);   
+  var decay = document.getElementById("decay").value=getRandomFloat(0,100);   
+  var sustain = document.getElementById("sustain").value=getRandomFloat(0,100);   
+  var release = document.getElementById("release").value=getRandomFloat(0,100); 
+
+  var maxDelay = document.getElementById("maxDelay").value=getRandomFloat(0.01,100);
+  var frequency = document.getElementById("frequency").value=getRandomFloat(0,100);   
+  var depth = document.getElementById("depth").value=getRandomFloat(0,100);  
+   
+  var duracion =document.getElementById("duracion").value=getRandomFloat(1,10);  
+  var octava =document.getElementById("octava").value=getRandomInt(-2,2);  
+  actualizar();
+}
+function getRandomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
