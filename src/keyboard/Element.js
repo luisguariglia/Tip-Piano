@@ -21,7 +21,7 @@ import {Roll} from 'roll/Roll'
 import {Note} from 'keyboard/Note'
 
 const offsets = [0, 0.5, 1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6]
-
+var socket = io();
 class KeyboardElement extends events.EventEmitter {
 
 	constructor(container, lowest=36, octaves=4){
@@ -143,7 +143,6 @@ class KeyboardElement extends events.EventEmitter {
 		}
 	}
 	enviar(nota){
-		var socket = io();
 		socket.emit('chat message',nota);
 	}
 	keyUp(noteNum, ai=false){
