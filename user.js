@@ -1,12 +1,26 @@
 var osc = new Tone.Oscillator();
 var ampEnv = new Tone.AmplitudeEnvelope().toMaster();
-osc.chain(ampEnv).start();
+var phaser = new Tone.Phaser({
+  "frequency" : 15,
+  "octaves" : 1,
+  "baseFrequency" : 500
+}).toMaster();
+osc.chain(ampEnv,phaser).start();
 
 function tocar(nota){
   var attack = document.getElementById("attack").value/100;   
   var decay = document.getElementById("decay").value/100;   
   var sustain = document.getElementById("sustain").value/100;   
   var release = document.getElementById("release").value/100; 
+
+  var maxDelay = document.getElementById("maxDelay").value/100;
+  var frequency = document.getElementById("frequency").value;   
+  var depth = document.getElementById("depth").value;  
+
+  phaser.frequency=frequency;
+  phaser.baseFrequency=depth
+
+
 
 
   var duracion =document.getElementById("duracion").value/10;  
@@ -19,7 +33,7 @@ function tocar(nota){
   
   var notaFinal=nota;
   notaFinal=notaFinal+(12*octava);
-  osc.frequency.value = Tone.Frequency(notaFinal, "midi").toMaster();
+  osc.frequency.value = Tone.Frequency(notaFinal, "midi");
   ampEnv.triggerAttackRelease(duracion).toMaster();
   visual(nota);
 }
