@@ -81,8 +81,17 @@
     <input oninput="actualizar()" class="slide" id="duracion" type="range" min="1" max="10" value="4">
     <p>Octava: </p><p id="octavaShow" class="value"></p>
     <input oninput="actualizar()" class="slide" id="octava" type="range" min="-2" max="2" value="0">
+    <p>Tipo: </p>
+    <select name="tipo" id="tipo">
+      <option value="sine">sine</option>
+      <option value="square">square</option>
+      <option value="sawtooth">sawtooth</option>
+      <option value="triangle">triangle</option>
+    </select>
+
     <div class="separador"></div>
     <button onclick="random()">Modificar valores aleatoriamente</button>
+
   </div>
 
     <script src="/socket.io/socket.io.js"></script>

@@ -13,6 +13,8 @@ function tocar(nota){
   var sustain = document.getElementById("sustain").value/100;   
   var release = document.getElementById("release").value/100; 
 
+  var tipo=document.getElementById("tipo").value ;
+
  
   var depth = document.getElementById("depth").value;  
 
@@ -32,6 +34,8 @@ function tocar(nota){
   var notaFinal=nota;
   notaFinal=notaFinal+(12*octava);
   osc.frequency.value = Tone.Frequency(notaFinal, "midi");
+  osc.volume.value=0.5;
+  osc.type=tipo;
   ampEnv.triggerAttackRelease(duracion).toMaster();
   visual(nota);
 }
@@ -106,15 +110,21 @@ function visual(nota) {
       }
 }
 function random() {
-  var attack = document.getElementById("attack").value=getRandomFloat(0,100);   
-  var decay = document.getElementById("decay").value=getRandomFloat(0,100);   
-  var sustain = document.getElementById("sustain").value=getRandomFloat(0,100);   
-  var release = document.getElementById("release").value=getRandomFloat(0,100); 
+  document.getElementById("attack").value=getRandomFloat(0,100);   
+  document.getElementById("decay").value=getRandomFloat(0,100);   
+  document.getElementById("sustain").value=getRandomFloat(0,100);   
+  document.getElementById("release").value=getRandomFloat(0,100); 
  
-  var depth = document.getElementById("depth").value=getRandomFloat(0,100);  
+  document.getElementById("depth").value=getRandomFloat(0,100);  
    
-  var duracion =document.getElementById("duracion").value=getRandomFloat(1,10);  
-  var octava =document.getElementById("octava").value=getRandomInt(-2,2);  
+  document.getElementById("duracion").value=getRandomFloat(1,10);  
+  document.getElementById("octava").value=getRandomInt(-2,2);  
+
+  document.getElementById("octava").value=getRandomInt(-2,2); 
+
+  var tipo = ["sine", "square", "sawtooth", "triangle"];
+  document.getElementById("tipo").value= tipo[getRandomInt(0,3)];
+
   actualizar();
 }
 function getRandomFloat(min, max) {
