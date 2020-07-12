@@ -13,11 +13,9 @@ function tocar(nota){
   var sustain = document.getElementById("sustain").value/100;   
   var release = document.getElementById("release").value/100; 
 
-  var maxDelay = document.getElementById("maxDelay").value/100;
-  var frequency = document.getElementById("frequency").value;   
+ 
   var depth = document.getElementById("depth").value;  
 
-  phaser.frequency=frequency;
   phaser.baseFrequency=depth
 
 
@@ -48,12 +46,8 @@ function actualizar() {
   document.getElementById("sustainShow").innerHTML=sustain;   
   document.getElementById("releaseShow").innerHTML=release;   
 
-  var maxDelay = document.getElementById("maxDelay").value/100;   
-  var frequency = document.getElementById("frequency").value/10;   
   var depth = document.getElementById("depth").value/10; 
 
-  document.getElementById("maxDelayShow").innerHTML=maxDelay;   
-  document.getElementById("frequencyShow").innerHTML=frequency;   
   document.getElementById("depthShow").innerHTML=depth;   
 
   var duracion =document.getElementById("duracion").value;  
@@ -116,9 +110,7 @@ function random() {
   var decay = document.getElementById("decay").value=getRandomFloat(0,100);   
   var sustain = document.getElementById("sustain").value=getRandomFloat(0,100);   
   var release = document.getElementById("release").value=getRandomFloat(0,100); 
-
-  var maxDelay = document.getElementById("maxDelay").value=getRandomFloat(0.01,100);
-  var frequency = document.getElementById("frequency").value=getRandomFloat(0,100);   
+ 
   var depth = document.getElementById("depth").value=getRandomFloat(0,100);  
    
   var duracion =document.getElementById("duracion").value=getRandomFloat(1,10);  
