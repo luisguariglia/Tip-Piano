@@ -2,6 +2,7 @@ var express=require("express");
 var app=express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+var PORT = process.env.PORT ||8080
 
 app.use("/build", express.static(__dirname + '/build'));
 app.use("/midi", express.static(__dirname + '/node_modules/midiconvert/build'));
@@ -37,6 +38,6 @@ io.on('connection', (socket) => {
 io.on('connection', (socket) => {               //mando mensajes a todos menos a mi
   socket.broadcast.emit('hi');
 });*/
-http.listen(3000, () => {
-  console.log('listening on *:3000/server and *:3000/user');
+http.listen(PORT, () => {
+  console.log('listening on *:PORT/server and *:PORT/user');
 });
