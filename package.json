@@ -1,7 +1,7 @@
 {
   "name": "ai-duet",
   "version": "1.0.0",
-  "description": "",
+  "description": "testing",
   "main": "build/Main.js",
   "repository": {
     "type": "git",
@@ -40,7 +40,16 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
+  "engines": {
+    "node": "12.17.0"
+  },
   "scripts": {
-    "build": "webpack -p --config webpack.config.js"
-  }
+    "build": "webpack -p --config webpack.config.js",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "index.js"
+  ],
+  "author": "luis",
+  "license": "UNLICENSED"
 }
