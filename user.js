@@ -1,11 +1,13 @@
-var osc = new Tone.Oscillator();
+
+var on=0;
 var ampEnv = new Tone.AmplitudeEnvelope().toMaster();
 var phaser = new Tone.Phaser({
   "frequency" : 15,
   "octaves" : 1,
   "baseFrequency" : 500
 }).toMaster();
-osc.chain(ampEnv,phaser).start();
+var osc = new Tone.Oscillator().chain(ampEnv,phaser).start();
+//osc.chain(ampEnv).start();
 
 function tocar(nota){
   var attack = document.getElementById("attack").value/100;   
@@ -18,12 +20,9 @@ function tocar(nota){
  
   var depth = document.getElementById("depth").value;  
 
-  phaser.baseFrequency=depth
+  phaser.baseFrequency=depth;
 
-
-
-
-  var duracion =document.getElementById("duracion").value/10;  
+  var duracion =document.getElementById("duracion").value;  
   var octava =document.getElementById("octava").value;  
 
   ampEnv.attack=attack;
@@ -34,12 +33,18 @@ function tocar(nota){
   var notaFinal=nota;
   notaFinal=notaFinal+(12*octava);
   osc.frequency.value = Tone.Frequency(notaFinal, "midi");
-  osc.volume.value=0.5;
+  //osc.volume.value=0.5;
   osc.type=tipo;
-  ampEnv.triggerAttackRelease(duracion).toMaster();
+  ampEnv.triggerAttackRelease("8t");
   visual(nota);
 }
+
 function actualizar() {
+  if(on===0){
+    var synth = new Tone.Synth().toMaster();
+    synth.triggerAttackRelease("C4", "8n");
+    on=1;
+    }
   var attack = document.getElementById("attack").value/100;   
   var decay = document.getElementById("decay").value/100;   
   var sustain = document.getElementById("sustain").value/100;   
