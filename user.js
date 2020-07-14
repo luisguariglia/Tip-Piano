@@ -1,5 +1,4 @@
 
-var on=0;
 var ampEnv = new Tone.AmplitudeEnvelope().toMaster();
 var phaser = new Tone.Phaser({
   "frequency" : 15,
@@ -7,9 +6,9 @@ var phaser = new Tone.Phaser({
   "baseFrequency" : 500
 }).toMaster();
 var osc = new Tone.Oscillator().chain(ampEnv,phaser).start();
-//osc.chain(ampEnv).start();
-
+var inicio=false;
 function tocar(nota){
+  if (inicio==true) {
   var attack = document.getElementById("attack").value/100;   
   var decay = document.getElementById("decay").value/100;   
   var sustain = document.getElementById("sustain").value/100;   
@@ -33,18 +32,18 @@ function tocar(nota){
   var notaFinal=nota;
   notaFinal=notaFinal+(12*octava);
   osc.frequency.value = Tone.Frequency(notaFinal, "midi");
-  //osc.volume.value=0.5;
+  osc.volume.value=0.5;
   osc.type=tipo;
   ampEnv.triggerAttackRelease("8t");
   visual(nota);
+  }
 }
 
 function actualizar() {
-  if(on===0){
-    var synth = new Tone.Synth().toMaster();
-    synth.triggerAttackRelease("C4", "8n");
-    on=1;
-    }
+  if (Tone.context.state !== 'running') {
+    Tone.context.resume();
+  }
+  inicio=true;
   var attack = document.getElementById("attack").value/100;   
   var decay = document.getElementById("decay").value/100;   
   var sustain = document.getElementById("sustain").value/100;   
@@ -137,4 +136,9 @@ function getRandomFloat(min, max) {
 }
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function iniciar(){
+  actualizar();
+  document.getElementById("modal-inicio").style.display="none";
+  document.getElementById("opciones").style.opacity=1;
 }

@@ -16,13 +16,17 @@
       <script type="text/javascript" src="https://unpkg.com/@tonejs/midi"></script>
       <style>
         body {
-          background: yellow;
+          height: 95vh;
+          background-color: gray;
+          background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);
         }
         .slide{
           width: 90%;;
           margin-left: 4%;
           margin-right: 4%;
         }
+        /*.grow { transition: all .2s ease-in-out; }
+        .grow:hover { transform: scale(1.1); }*/
         .slide:hover {
           opacity: 1;
         }
@@ -34,6 +38,7 @@
           max-width: 750px;
           /*background-color: rgba(255, 255, 255, 0.9);*/
           box-shadow: 0px 0px 5px black;
+          opacity: 0;
         }
         .separador{
           margin-top: 5px;
@@ -49,12 +54,37 @@
         .value{
           font-weight: bold;
         }
+        .modal-inicio{
+          margin: 5%;
+          padding: 1% ;
+          border: black;
+          border-style: solid;
+          max-width: 750px;
+          box-shadow: 0px 0px 5px black;
+          text-align: center;
+        }
+        button{
+          height: 50px;
+          background-color: #0aaefa;
+          padding: 2px;
+          border: none;
+          padding-left: 5px;
+          padding-right: 5px;
+          transition: all .2s ease-in-out;
+        }
+        button:hover{
+          transform: scale(1.05);
+        }
+
       </style>
 </head>
-<body onload="setTimeout(actualizar, 1000)"  id ="container">
-  <!--<button onclick="tocar(64)" style="width: 50px; height: 20px; margin-left: 40%;"></button>
-  <button onclick="tocar(65)" style="width: 50px; height: 20px; margin-left: 40%;"></button>-->
-  <div class="opciones">
+<body id ="container">
+  <div class="modal-inicio" id="modal-inicio">
+    <h2>Bienvenido a TIP Piano!</h2><br>
+    <h5>En esta aplicacion se recibiran notas de otra persona que este tocando y se reproducira un sonido, este sonido cambiara dependiendo de los modificadores disponibles.</h5><br>
+    <button onclick="iniciar()">Continuar</button>
+  </div>
+  <div class="opciones" id="opciones">
     <h2 style="text-align: center;">Modificadores</h2>
 
     <div class="separador"></div>
