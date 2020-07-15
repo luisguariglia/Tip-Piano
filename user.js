@@ -21,7 +21,7 @@ function tocar(nota){
 
   phaser.baseFrequency=depth;
 
-  var duracion =document.getElementById("duracion").value;  
+  //var duracion =document.getElementById("duracion").value/10;  
   var octava =document.getElementById("octava").value;  
 
   ampEnv.attack=attack;
@@ -58,8 +58,8 @@ function actualizar() {
 
   document.getElementById("depthShow").innerHTML=depth;   
 
-  var duracion =document.getElementById("duracion").value;  
-  document.getElementById("duracionShow").innerHTML=duracion;  
+  //var duracion =document.getElementById("duracion").value;  
+  //document.getElementById("duracionShow").innerHTML=duracion;  
   
   var octava =document.getElementById("octava").value;  
   document.getElementById("octavaShow").innerHTML=octava;  
@@ -121,8 +121,8 @@ function random() {
  
   document.getElementById("depth").value=getRandomFloat(0,100);  
    
-  document.getElementById("duracion").value=getRandomFloat(1,10);  
-  document.getElementById("octava").value=getRandomInt(-2,2);  
+  //document.getElementById("duracion").value=getRandomFloat(1,10);  
+  //document.getElementById("octava").value=getRandomInt(-2,2);  
 
   document.getElementById("octava").value=getRandomInt(-2,2); 
 
