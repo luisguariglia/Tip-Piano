@@ -4,79 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font: 13px Helvetica, Arial; }      
-        #messages { list-style-type: none; margin: 0; padding: 0; }
-        #messages li { padding: 5px 10px; }
-        #messages li:nth-child(odd) { background: #eee; }
-      </style>
-      <script type="text/javascript" src="https://unpkg.com/tone@13.4.9/build/Tone.js"></script>
-      <script type="text/javascript" src="https://unpkg.com/@tonejs/ui@0.0.8/build/tonejs-ui.js"></script>
-      <script type="text/javascript" src="https://unpkg.com/@tonejs/midi"></script>
-      <style>
-        body {
-          height: 95vh;
-          background-color: gray;
-          background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);
-        }
-        .slide{
-          width: 90%;;
-          margin-left: 4%;
-          margin-right: 4%;
-        }
-        /*.grow { transition: all .2s ease-in-out; }
-        .grow:hover { transform: scale(1.1); }*/
-        .slide:hover {
-          opacity: 1;
-        }
-        .opciones{
-          margin: 5%;
-          padding: 1% ;
-          border: black;
-          border-style: solid;
-          max-width: 750px;
-          /*background-color: rgba(255, 255, 255, 0.9);*/
-          box-shadow: 0px 0px 5px black;
-          opacity: 0;
-        }
-        .separador{
-          margin-top: 5px;
-          margin-bottom: 5px;
-          width: 100%;
-          height: 2px;
-          background-color: rgba(105, 115, 161, 0.493)
-        }
-        p{
-          display: inline-block;
-          vertical-align: top;
-        }
-        .value{
-          font-weight: bold;
-        }
-        .modal-inicio{
-          margin: 5%;
-          padding: 1% ;
-          border: black;
-          border-style: solid;
-          max-width: 750px;
-          box-shadow: 0px 0px 5px black;
-          text-align: center;
-        }
-        button{
-          height: 50px;
-          background-color: #0aaefa;
-          padding: 2px;
-          border: none;
-          padding-left: 5px;
-          padding-right: 5px;
-          transition: all .2s ease-in-out;
-        }
-        button:hover{
-          transform: scale(1.05);
-        }
-
-      </style>
+    <link rel="stylesheet" type="text/css" href="/style/miEstilo.css">
+    <script type="text/javascript" src="https://unpkg.com/tone@13.4.9/build/Tone.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@tonejs/ui@0.0.8/build/tonejs-ui.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@tonejs/midi"></script>
 </head>
 <body id ="container">
   <div class="modal-inicio" id="modal-inicio">
@@ -89,39 +20,25 @@
 
     <div class="separador"></div>
 
-    <h3>AmplitudeEnvelope</h3><br>
-    <p>attack: </p><p id="attackShow" class="value"></p>
+    <p>Attack: </p><p id="attackShow" class="value"></p>
     <input oninput="actualizar()" class="slide" id="attack" type="range" min="0" max="100" value="5">
-    <p>decay: </p><p id="decayShow" class="value"></p>
-    <input oninput="actualizar()" class="slide" id="decay" type="range" min="0" max="100" value="20">
-    <p>sustain: </p><p id="sustainShow" class="value"></p>
-    <input oninput="actualizar()" class="slide" id="sustain" type="range" min="0" max="100" value="10">
-    <p>release: </p><p id="releaseShow" class="value"></p>
+    
+    <p>Release: </p><p id="releaseShow" class="value"></p>
     <input oninput="actualizar()" class="slide" id="release" type="range" min="0" max="100" value="8">
-    
-    <div class="separador"></div>
-    
 
-    <p>depth: </p><p id="depthShow" class="value"></p>
-    <input oninput="actualizar()" class="slide" id="depth" type="range" min="0" max="250" value="0.1">
-    
-    <div class="separador"></div>
-    
-    <!--<p>Duración de nota: </p><p id="duracionShow" class="value"></p>
-    <input oninput="actualizar()" class="slide" id="duracion" type="range" min="1" max="10" value="4">-->
     <p>Octava: </p><p id="octavaShow" class="value"></p>
     <input oninput="actualizar()" class="slide" id="octava" type="range" min="-2" max="2" value="0">
-    <p>Tipo: </p>
-    <select name="tipo" id="tipo">
+
+    <br><br><p class="texto-tipo">Tipo: </p>
+    <select name="tipo" id="tipo" class="tipo">
       <option value="sine">sine</option>
       <option value="square">square</option>
       <option value="sawtooth">sawtooth</option>
       <option value="triangle">triangle</option>
     </select>
 
-    <div class="separador"></div>
-    <button onclick="random()">Modificar valores aleatoriamente</button>
-
+    <button onclick="random()" class="random">Modificar aleatoriamente</button>
+    <br><br>
   </div>
 
     <script src="/socket.io/socket.io.js"></script>

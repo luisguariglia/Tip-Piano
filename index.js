@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 var PORT = process.env.PORT ||8080
 
 app.use("/build", express.static(__dirname + '/build'));
+app.use("/style", express.static(__dirname + '/style'));
 app.use("/midi", express.static(__dirname + '/node_modules/midiconvert/build'));
 app.use("/images", express.static(__dirname + './images'));
 app.use("/audio/Salamander", express.static(__dirname + '/audio/Salamander'));
@@ -16,6 +17,9 @@ app.get('/server', (req, res) => {
 });
 app.get('/user', (req, res) => {
   res.sendFile(__dirname + '/user.html');
+});
+app.get('/screen', (req, res) => {
+  res.sendFile(__dirname + '/screen.html');
 });
 
 io.on('connection', (socket) => {
