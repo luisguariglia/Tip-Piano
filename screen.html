@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen</title>
+    <link rel="stylesheet" type="text/css" href="/style/miEstiloScreen.css">
+    <script src="/p5.min.js"></script>
+    <script src="sketchScreen.js"></script>
+</head>
+<body>
+  <script src="/socket.io/socket.io.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(function () {
+		  var socket = io();
+		  socket.on('chat message', function(msg){
+      setY(msg)
+		  });
+		});
+  </script>
+</body>
+</html>
