@@ -50,6 +50,7 @@
 		  var socket = io();
 		  socket.on('chat message', function(msg){
       tocar(msg);
+      setY(msg)
 		  });
 		});
   </script>
