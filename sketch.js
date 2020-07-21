@@ -4,10 +4,19 @@ let to;
 let cont=0;
 var posY=0;
 var altura=0;
-
-function setup() {
-  altura=windowHeight-(windowHeight*0.4);
-  createCanvas(windowWidth, altura);
+var ancho=0;
+function setup() {  
+  altura=windowHeight-(windowHeight*(0.4));     //alto y margen
+  if(altura>384)       //640-(640*0.4)
+  {
+    altura=384;
+  }
+  ancho=windowWidth-(windowWidth*0.1);
+  if(ancho>750)  //esto es el maxwith
+  {
+    ancho=750;
+  }
+  createCanvas(ancho, altura);
   noStroke();
   x = width / 2;
   y = height/2;
@@ -16,10 +25,14 @@ function setup() {
   to=color(66, 200, 245);
 }
 function setY(num) {
-  posY=10+(altura-(num*altura)/107);
+  var octava =document.getElementById("octava").value;
+  notaFinal=num+(12*octava);
+
+  posY=10+(altura-(notaFinal*altura)/107);
 }
 function draw() {
   clear();
+  //background(51);
   //posY=mouseY;
   if(posY>height-150){
     posY=height-150;

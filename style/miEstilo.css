@@ -4,7 +4,7 @@ body { font: 13px Helvetica, Arial; }
 #messages li { padding: 5px 10px; }
 #messages li:nth-child(odd) { background: #eee; }
 body {
-    height: 95vh;
+    /*height: 95vh;*/
     background-color: gray;
     background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px);
   }
@@ -78,4 +78,8 @@ body {
   .p5Canvas{
       position: absolute;
       top: 40vh;
+      margin: 5%;
+      padding: 1% ;
+      margin-top: 0px;
+      padding-top: 0px;
   }
