@@ -41,7 +41,26 @@ export class About extends events.EventEmitter{
 		this._container.id = 'about'
 		container.appendChild(this._container)
 
-		
+		//seleccionar sala
+		this._divSala = document.createElement('div');
+		this._divSala.id='divSala';	
+		this._divSala.innerHTML=`
+		<div class="divSala">	
+			<h4 style="float:left;">Sala: </h4>		
+			
+			<select name="sala" id="sala" class="" style="margin-top:15px;" onchange="setSala()">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+			</select>	
+			
+		</div>`;
+		this._divSala.classList.add('open');
+		container.appendChild(this._divSala);
+
+
+		/**/
 		//importar midi--------------------------------
 
 		this._divImportar = document.createElement('div');
@@ -58,8 +77,7 @@ export class About extends events.EventEmitter{
 			<div id="Results">			
 				<textarea id="ResultsText" style="width:0px;height:0px;visibility: hidden;" placeholder="json output..."></textarea>		
 			</div>		
-			<tone-play-toggle disabled></tone-play-toggle>	
-
+			
 		</div>`;
 		this._divImportar.classList.add('open');
 		container.appendChild(this._divImportar);
@@ -95,7 +113,6 @@ export class About extends events.EventEmitter{
 			reader.onload = function(e){
 				const midi = new Midi(e.target.result)
 				document.querySelector("#ResultsText").value = JSON.stringify(midi, undefined, 2)
-				document.querySelector('tone-play-toggle').removeAttribute('disabled')
 				currentMidi = midi
 				midiExportar = currentMidi
 				
@@ -103,37 +120,6 @@ export class About extends events.EventEmitter{
 			}
 			reader.readAsArrayBuffer(file)
 		}
-
-		const synths = []
-		document.querySelector('tone-play-toggle').addEventListener('play', (e) => {
-			const playing = e.detail
-			if (playing && currentMidi){
-				//alert(currentMidi.tracks);
-				const now = Tone.now() + 0.5
-				currentMidi.tracks.forEach(track => {
-					//create a synth for each track
-					const synth = new Tone.PolySynth(10, Tone.Synth, {
-						envelope : {
-							attack : 0.02,
-							decay : 0.1,
-							sustain : 0.3,
-							release : 1
-						}
-					}).toMaster()
-					synths.push(synth)
-					//schedule all of the events
-					track.notes.forEach(note => {
-						synth.triggerAttackRelease(note.name, note.duration, note.time + now, note.velocity)
-					})
-				})
-			} else {
-				//dispose the synth and make a new one
-				while(synths.length){
-					const synth = synths.shift()
-					synth.dispose()
-				}
-			}
-		})
 
 		//fin inportar midi-------------------------------
 
@@ -291,6 +277,7 @@ export class About extends events.EventEmitter{
 		this._BotonMenos.classList.add('show')
 		this.cantidad.classList.add('show')
 		this._divImportar.classList.add('show')
+		this._divSala.classList.add('show')
 		/*this._divMensajes.classList.add('show')*/
 	}
 	

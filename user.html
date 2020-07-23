@@ -8,6 +8,12 @@
     <script type="text/javascript" src="https://unpkg.com/tone@13.4.9/build/Tone.js"></script>
     <script type="text/javascript" src="https://unpkg.com/@tonejs/ui@0.0.8/build/tonejs-ui.js"></script>
     <script type="text/javascript" src="https://unpkg.com/@tonejs/midi"></script>
+
+    <!--<script src="/socket.io/socket.io.js"></script>
+	  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="indexUser.js"></script>-->
+
+
     <script src="/p5.min.js"></script>
     <script src="sketch.js"></script>
 </head>
@@ -38,20 +44,27 @@
       <option value="sawtooth">sawtooth</option>
       <option value="triangle">triangle</option>
     </select>
+    <select name="sala" id="sala" class="" style="margin-top:15px;" onchange="setSala()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
 
     <button onclick="random()" class="random">Modificar aleatoriamente</button>
     <br><br>
   </div>
 
-    <script src="/socket.io/socket.io.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		$(function () {
-		  var socket = io();
-		  socket.on('chat message', function(msg){
-      tocar(msg);
-      setY(msg)
-		  });
+        var socket = io();
+        socket.on('chat message', function(msg){
+        tocar(msg);
+        setY(msg);
+      });
+           
 		});
   </script>
   

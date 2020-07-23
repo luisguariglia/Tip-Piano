@@ -2,7 +2,8 @@ var express=require("express");
 var app=express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var PORT = process.env.PORT ||8080
+var PORT = process.env.PORT ||3000
+var sala="1";
 
 app.use("/build", express.static(__dirname + '/build'));
 app.use("/style", express.static(__dirname + '/style'));
@@ -23,7 +24,8 @@ app.get('/screen', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  socket.join(sala);
+  console.log('a user connected to:'+sala);
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -36,12 +38,14 @@ io.on('connection', (socket) => {
 
 io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);                   //mando el mensaje a todos y a mi
+    io.to(sala).emit('chat message', msg);                   //mando el mensaje a todos y a mi
   });
-});/*
-io.on('connection', (socket) => {               //mando mensajes a todos menos a mi
-  socket.broadcast.emit('hi');
-});*/
+});
+
 http.listen(PORT, () => {
   console.log('listening on *:PORT/server and *:PORT/user');
 });
+
+function setSala(){
+  this.sala=document.getElementById("sala").value;
+}
