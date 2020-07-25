@@ -162,6 +162,7 @@ function iniciar(){
     mySin = new Sintetizador(i);
     this.notas[i]=mySin;
   }
+  socket.emit('join', document.getElementById("sala").value);
   actualizar();
   document.getElementById("modal-inicio").style.display="none";
   document.getElementById("opciones").style.opacity=1;

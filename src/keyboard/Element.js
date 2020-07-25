@@ -22,6 +22,7 @@ import {Note} from 'keyboard/Note'
 
 const offsets = [0, 0.5, 1, 1.5, 2, 3, 3.5, 4, 4.5, 5, 5.5, 6]
 var socket = io();
+
 class KeyboardElement extends events.EventEmitter {
 
 	constructor(container, lowest=36, octaves=4){
@@ -45,6 +46,9 @@ class KeyboardElement extends events.EventEmitter {
 
 		this._aiNotes = {}
 		this._notes = {}
+		this._conectadoSala = false
+		
+
 	}
 
 	resize(lowest, octaves){
@@ -142,10 +146,17 @@ class KeyboardElement extends events.EventEmitter {
 			
 		}
 	}
+	conectarRoom(){
+		console.log('join a sala '+localStorage.getItem('sala'));
+		socket.emit('join', localStorage.getItem('sala'));
+		this._conectadoSala=true;
+	}
 	enviarDown(nota){
+		if(!this._conectadoSala) this.conectarRoom();
 		socket.emit('chat message',(nota+"-down"));
 	}
 	enviarUp(nota){
+		if(!this._conectadoSala) this.conectarRoom();
 		socket.emit('chat message',(nota+"-up"));
 	}
 	keyUp(noteNum, ai=false){

@@ -24,23 +24,36 @@ app.get('/screen', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  socket.join(sala);
+  //socket.join(sala);
+  let sroom;
   console.log('a user connected to:'+sala);
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+  socket.on('join', function(room) {
+    console.log('join', room);
+    sroom = 'sala'+room;
+    socket.join(sroom, function() {
+        console.log(socket.rooms); 
+    });
+  });
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);             //muestro en consola
+    io.to(sroom).emit('chat message', msg);                   //mando el mensaje a todos y a mi
+  });
 });
-io.on('connection', (socket) => {
+/*io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     console.log('message: ' + msg);             //muestro en consola
   });
-});
+});*/
 
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
+  /*socket.on('chat message', (msg) => {
     io.to(sala).emit('chat message', msg);                   //mando el mensaje a todos y a mi
-  });
+  });*/
 });
+
 
 http.listen(PORT, () => {
   console.log('listening on *:PORT/server and *:PORT/user');
