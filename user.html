@@ -21,7 +21,7 @@
   <div class="modal-inicio" id="modal-inicio">
     <h2>Bienvenido a TIP Piano!</h2><br>
     <h5>En esta aplicacion se recibiran notas de otra persona que este tocando y se reproducira un sonido, este sonido cambiara dependiendo de los modificadores disponibles.</h5><br>
-    <select id="sala" name="sala">
+    <select id="sala" name="sala" class="tipo"> 
       <option value="1">Sala 1</option>
       <option value="2">Sala 2</option>
       <option value="3">Sala 3</option>
@@ -50,15 +50,9 @@
       <option value="sawtooth">sawtooth</option>
       <option value="triangle">triangle</option>
     </select>
-    <select name="sala" id="sala" class="" style="margin-top:15px;" onchange="setSala()">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
+
 
     <button onclick="random()" class="random">Modificar aleatoriamente</button>
-    <button onclick="random()">AAAAAAAAAAAAAAAA</button>
     <br><br>
   </div>
 
