@@ -5,12 +5,33 @@ var phaser = new Tone.Phaser({
   "octaves" : 1,
   "baseFrequency" : 500
 }).toMaster();
-var osc = new Tone.Oscillator().chain(ampEnv).start();
+//var osc = new Tone.Oscillator().chain(ampEnv).start();
+var notas = [];
+class Sintetizador {
+  constructor(nota) {
+    this.nota=nota;
+    this.synth = new Tone.MonoSynth({
+      oscillator: {
+        type: "square"
+      },
+      envelope: {
+        attack: 0.1
+      }}).toMaster();
+  }
+  tocar(){
+    this.synth.triggerAttack(Tone.Frequency(this.nota, "midi"));
+  }
+  tocarUp(){
+    this.synth.triggerRelease();
+  }
+}
+
 var inicio=false;
 
 function tocar(nota){
   if (inicio==true) {
-  var attack = document.getElementById("attack").value/100;   
+    
+  /*var attack = document.getElementById("attack").value/100;   
   var release = document.getElementById("release").value/100; 
   var tipo=document.getElementById("tipo").value ;
   var octava =document.getElementById("octava").value;  
@@ -22,15 +43,30 @@ function tocar(nota){
   notaFinal=notaFinal+(12*octava);
   osc.frequency.value = Tone.Frequency(notaFinal, "midi");
   osc.volume.value=0.5;
-  osc.type=tipo;
-  ampEnv.triggerAttackRelease("8t");
+  osc.type=tipo;*/
+  //ampEnv.triggerAttackRelease("8t");
+  //synth.oscillator.frequency.value = Tone.Frequency(nota, "midi");
+  this.notas[nota].tocar();
   visual(nota);
+
+//attach a listener to the keyboard events
+
+  }
+}
+function tocarUp(nota){
+  if (inicio==true) {
+  this.notas[nota].tocarUp();
   }
 }
 
 function actualizar() {
   if (Tone.context.state !== 'running') {
     Tone.context.resume();
+  }
+  
+  for(var i=0;i<110;i++){
+    mySin = new Sintetizador(i);
+    this.notas[i]=mySin;
   }
   inicio=true;
   var attack = document.getElementById("attack").value/100;   
@@ -110,4 +146,5 @@ function iniciar(){
   actualizar();
   document.getElementById("modal-inicio").style.display="none";
   document.getElementById("opciones").style.opacity=1;
+
 }

@@ -133,7 +133,7 @@ class KeyboardElement extends events.EventEmitter {
 			key.classList.remove('hover')
 
 			const note = new Note(key.querySelector('#fill'), ai)
-			this.enviar(noteNum);
+			this.enviarDown(noteNum);
 			const noteArray = ai ? this._aiNotes : this._notes
 			if (!noteArray[noteNum]){
 				noteArray[noteNum] = []
@@ -142,8 +142,11 @@ class KeyboardElement extends events.EventEmitter {
 			
 		}
 	}
-	enviar(nota){
-		socket.emit('chat message',nota);
+	enviarDown(nota){
+		socket.emit('chat message',(nota+"-down"));
+	}
+	enviarUp(nota){
+		socket.emit('chat message',(nota+"-up"));
 	}
 	keyUp(noteNum, ai=false){
 		// console.log('up', noteNum, ai)
@@ -155,6 +158,7 @@ class KeyboardElement extends events.EventEmitter {
 				console.warn('note off before note on')
 			} else {
 				noteArray[noteNum].shift().noteOff()
+				this.enviarUp(noteNum);
 			}
 		}	
 	}

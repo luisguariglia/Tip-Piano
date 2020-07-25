@@ -61,8 +61,15 @@
 		$(function () {
         var socket = io();
         socket.on('chat message', function(msg){
-        tocar(msg);
-        setY(msg);
+        var partes = msg.split("-");  
+        if(partes[1]=="down"){
+          tocar(partes[0]);
+        }
+        if(partes[1]=="up"){
+          tocarUp(partes[0]);
+        }
+        
+        //setY(msg);
       });
            
 		});
