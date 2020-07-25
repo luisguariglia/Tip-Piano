@@ -143,6 +143,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 function iniciar(){
+  socket.emit('join', document.getElementById("sala").value);
   actualizar();
   document.getElementById("modal-inicio").style.display="none";
   document.getElementById("opciones").style.opacity=1;

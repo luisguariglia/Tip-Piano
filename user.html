@@ -21,6 +21,12 @@
   <div class="modal-inicio" id="modal-inicio">
     <h2>Bienvenido a TIP Piano!</h2><br>
     <h5>En esta aplicacion se recibiran notas de otra persona que este tocando y se reproducira un sonido, este sonido cambiara dependiendo de los modificadores disponibles.</h5><br>
+    <select id="sala" name="sala">
+      <option value="1">Sala 1</option>
+      <option value="2">Sala 2</option>
+      <option value="3">Sala 3</option>
+      <option value="4">Sala 4</option>
+    </select>
     <button onclick="iniciar()">Continuar</button>
   </div>
   <div class="opciones" id="opciones">
@@ -58,8 +64,10 @@
   <script src="/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
-		$(function () {
-        var socket = io();
+	   var socket = io();
+  
+  	$(function () {
+        
         socket.on('chat message', function(msg){
         var partes = msg.split("-");  
         if(partes[1]=="down"){
