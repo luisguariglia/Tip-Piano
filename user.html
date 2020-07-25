@@ -29,16 +29,16 @@
     <div class="separador"></div>
 
     <p>Attack: </p><p id="attackShow" class="value"></p>
-    <input oninput="actualizar()" class="slide" id="attack" type="range" min="0" max="100" value="5">
+    <input oninput="actualizar()" class="slide" id="attack" type="range" min="1" max="100" value="5">
     
     <p>Release: </p><p id="releaseShow" class="value"></p>
-    <input oninput="actualizar()" class="slide" id="release" type="range" min="0" max="100" value="8">
+    <input oninput="actualizar()" class="slide" id="release" type="range" min="1" max="100" value="8">
 
     <p>Octava: </p><p id="octavaShow" class="value"></p>
     <input oninput="actualizar()" class="slide" id="octava" type="range" min="-2" max="2" value="0">
 
     <br><br><p class="texto-tipo">Tipo: </p>
-    <select name="tipo" id="tipo" class="tipo">
+    <select name="tipo" id="tipo" class="tipo" onchange="actualizar()">
       <option value="sine">sine</option>
       <option value="square">square</option>
       <option value="sawtooth">sawtooth</option>
@@ -52,6 +52,7 @@
     </select>
 
     <button onclick="random()" class="random">Modificar aleatoriamente</button>
+    <button onclick="random()">AAAAAAAAAAAAAAAA</button>
     <br><br>
   </div>
 

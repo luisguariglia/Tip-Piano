@@ -5,24 +5,37 @@ var phaser = new Tone.Phaser({
   "octaves" : 1,
   "baseFrequency" : 500
 }).toMaster();
-//var osc = new Tone.Oscillator().chain(ampEnv).start();
 var notas = [];
 class Sintetizador {
   constructor(nota) {
+    this.octava=0
     this.nota=nota;
     this.synth = new Tone.MonoSynth({
       oscillator: {
         type: "square"
       },
       envelope: {
-        attack: 0.1
+        attack: 0.5,
+        release: 0.5
       }}).toMaster();
   }
   tocar(){
-    this.synth.triggerAttack(Tone.Frequency(this.nota, "midi"));
+    this.synth.triggerAttack(Tone.Frequency(this.nota+(12*this.octava), "midi"));
   }
   tocarUp(){
     this.synth.triggerRelease();
+  }
+  setType(tipo){
+    this.synth.oscillator.type=tipo;
+  }
+  setAttack(num){
+    this.synth.envelope.attack=num;
+  }
+  setRelease(num){
+    this.synth.envelope.release=num;
+  }
+  setOctava(num){
+    this.octava=num;
   }
 }
 
@@ -60,28 +73,26 @@ function tocarUp(nota){
 }
 
 function actualizar() {
-  if (Tone.context.state !== 'running') {
-    Tone.context.resume();
-  }
-  
-  for(var i=0;i<110;i++){
-    mySin = new Sintetizador(i);
-    this.notas[i]=mySin;
-  }
   inicio=true;
   var attack = document.getElementById("attack").value/100;   
   var release = document.getElementById("release").value/100;
+  var octava =document.getElementById("octava").value; 
+  var tipo=document.getElementById("tipo").value ;
 
+  
   document.getElementById("attackShow").innerHTML=attack;   
-
   document.getElementById("releaseShow").innerHTML=release;   
- 
-  var octava =document.getElementById("octava").value;  
   document.getElementById("octavaShow").innerHTML=octava;  
 
+  for(var i=20;i<110;i++){
+    this.notas[i].setAttack(attack);
+    this.notas[i].setType(tipo);
+    this.notas[i].setOctava(octava);
+    this.notas[i].setRelease(release);
+  }
 }
 function visual(nota) {
-    var randomColor = Math.floor(Math.random()*16777215).toString(16);
+    //var randomColor = Math.floor(Math.random()*16777215).toString(16);
     var elem = document.getElementById("container");   
     var color=nota%12;
     switch(color) {
@@ -127,14 +138,15 @@ function visual(nota) {
       }
 }
 function random() {
-  document.getElementById("attack").value=getRandomFloat(0,100);   
+  alert("hola");
+  /*document.getElementById("attack").value=getRandomFloat(0,100);   
   document.getElementById("release").value=getRandomFloat(0,100); 
   document.getElementById("octava").value=getRandomInt(-2,2); 
 
   var tipo = ["sine", "square", "sawtooth", "triangle"];
   document.getElementById("tipo").value= tipo[getRandomInt(0,3)];
 
-  actualizar();
+  actualizar();*/
 }
 function getRandomFloat(min, max) {
   return Math.random() * (max - min) + min;
@@ -143,8 +155,15 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 function iniciar(){
+  if (Tone.context.state !== 'running') {
+    Tone.context.resume();
+  }
+  for(var i=20;i<110;i++){
+    mySin = new Sintetizador(i);
+    this.notas[i]=mySin;
+  }
   actualizar();
   document.getElementById("modal-inicio").style.display="none";
   document.getElementById("opciones").style.opacity=1;
-
+  
 }
