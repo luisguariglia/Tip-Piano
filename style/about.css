@@ -58,8 +58,9 @@ form button { width: 20%; background: rgb(130, 224, 255); border: none; padding:
 	.open:before{
 
 		/*content: "";
-		background-color: white;
-		display: none;*/
+		background-color: white;*/
+		display: none;
+		-webkit-filter: opacity(0);
 	}
 
 	&.show.open:before {
@@ -106,14 +107,14 @@ form button { width: 20%; background: rgb(130, 224, 255); border: none; padding:
 	$closeSize : 40px;
 	position: absolute;
 	top: 15px;
-	left: 450px;
-	width: $closeSize*2;
+	right: 450px;
+	width: $closeSize;
 	height: $closeSize;
 	cursor: pointer;
 	z-index: 2000;
 	transition: transform 0.1s;
 	text-align: center;
-	
+
 	&:hover {
 		transform: scale(1.1);
 	}
@@ -129,9 +130,11 @@ form button { width: 20%; background: rgb(130, 224, 255); border: none; padding:
 		line-height: $closeSize;
 	}
 	&.open:before{
-		/*content: "Octava";
-		background-color: #e3ad0b;*/
-		/*border-radius: 50%;*/
+		/*content: "+";
+		background-color: #e3ad0b;
+		border-radius: 50%;*/
+		width: 0px;
+		height: 0px;
 		display: none;
 	}
 

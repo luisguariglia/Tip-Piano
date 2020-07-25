@@ -172,8 +172,8 @@ $topMargin: 35px;
 		margin-top: $topMargin;
 	}
 
-	$badgeWidth : 130px;
-	$badgeHeight: 60px;
+	$badgeWidth : 135px;
+	$badgeHeight: 70px;
 	$badgeMargin : 20px;
 	$badegOpacity: 0.7;
 

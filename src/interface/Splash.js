@@ -69,7 +69,7 @@ class Splash extends events.EventEmitter{
 		tip.id = 'magentaLink'
 		tip.classList.add('badge')
 		const imgHtml = '<div id="img"></div>'
-		tip.innerHTML = imgHtml + '<div id="text">Tecnólogo en Informática</div>'
+		tip.innerHTML = imgHtml + '<div id="text">Tecnólogo en Informática </div>'
 		badges.appendChild(tip)
 
 		// break

@@ -43,13 +43,13 @@ export class About extends events.EventEmitter{
 
 		localStorage.setItem('sala', 1);
 		//seleccionar sala
-		this._divSala = document.createElement('div');
+		/*this._divSala = document.createElement('div');
 		this._divSala.id='divSala';	
 		this._divSala.innerHTML=`
 		<div class="divSala">	
-			<h4 style="float:left;">Salas: </h4>		
+			<h4 style="float:left;" class="divSala">Salas: </h4>		
 			
-			<select name="sala" id="sala" class="" style="margin-top:15px;" >
+			<select name="sala" id="sala" class="" style="margin-top:15px; divSala" >
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -62,7 +62,7 @@ export class About extends events.EventEmitter{
 		this._divSala.addEventListener('change', (e) => {
 			e.preventDefault()
 			localStorage.setItem('sala', document.getElementById("sala").value);
-		})
+		})*/
 
 
 		/**/

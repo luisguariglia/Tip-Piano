@@ -24,6 +24,27 @@ export default class Loader extends EventEmitter{
 	constructor(container){
 		super()
 
+		this._divSala = document.createElement('div');
+		this._divSala.id='divSala';	
+		this._divSala.innerHTML=`
+		<div class="divSala">	
+			<h4 style="float:left;" class="divSala">Sala: </h4>		
+			
+			<select name="sala" id="sala" class="" style="margin-top:15px; padding: 5px;margin: 3px;background-color: orange;" >
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+			</select>	
+			
+		</div>`;
+		this._divSala.classList.add('open');
+		container.appendChild(this._divSala);
+		this._divSala.addEventListener('change', (e) => {
+			e.preventDefault()
+			localStorage.setItem('sala', document.getElementById("sala").value);
+		})
+
 		const loader = document.createElement('div')
 		loader.id = 'loader'
 		container.appendChild(loader)
