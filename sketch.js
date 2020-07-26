@@ -31,6 +31,9 @@ var cantando=1;
 var cantandoBool=false;
 //var tiempoCantando=25;
 
+/*
+var notasALaVez= [];*/
+
 
 function setup() {  
   altura=windowHeight-(windowHeight*(0.4));     //alto y margen
@@ -57,64 +60,46 @@ function setup() {
 function iniciar(){
   inicio=true;
 }
-function dejarDeTocar() {
+function dejarDeTocar(num) {
+  if(inicio){
   cantando--;
+  /*var nota=(num%12)+1;
+    for(var i=0;i<notasALaVez.length;i++){
+      if(notasALaVez[i]==nota){
+        notasALaVez.splice(i, 1);
+      }
+    }*/
+  //print(notasALaVez);
+  
   if(cantando<1){
     cantando=1;
   }
   if(cantando==1){
+    notasALaVez= [];
     cantandoBool=false;
   }
+}
 }
 function setY(num) {
   if(inicio){
   //var octava =document.getElementById("octava").value;
   //notaFinal=num+(12*octava);
+  //var nota=(num%12)+1;
+  //var yaHay=false;
+  /*for(var i=0;i<notasALaVez.length;i++){
+    if(notasALaVez[i]==nota){
+      yaHay=true;
+    }
+  }*/
+  //if(!yaHay){
+  //notasALaVez.push(nota);
+  //}
+
+ // print(notasALaVez);
   cantando++;
   cantandoBool=true;
   futureY=10+(altura-(num*altura)/107);
 
-
- /* var color=num%12;
-  
-    switch(color) {
-        case 0:
-            to=[255, 0, 0]; 
-          break;
-        case 1:
-            to=[ 128, 0, 128]; 
-          break;
-          case 2:
-            to=[ 255, 255, 0]; 
-          break;
-          case 3:
-            to=[ 176, 196, 222]; 
-          break;
-          case 4:
-            to=[ 135, 206, 235]; 
-          break;
-          case 5:
-            to=[ 139, 0, 0]; 
-          break;
-          case 6:
-            to=[ 238, 130, 238]; 
-          break;
-          case 7:
-            to=[ 255, 165, 0]; 
-          break;
-          case 8:
-            to=[ 138, 43, 226]; 
-          break;
-          case 9:
-            to=[ 0, 255, 0]; 
-          break;
-          case 10:
-            to=[ 255, 0, 255]; 
-          break;
-          case 11:
-            to=[ 0, 0, 255]; 
-          break;
-    }*/
   }
 }
 function draw() {
@@ -147,7 +132,7 @@ function draw() {
   }
   contTiempoEntreSalto++;
   if (cantandoBool) {
-    tamañoExtra=sin(tiempo*0.3)*2;
+    tamañoExtra=sin((tiempo*0.3)*(cantando*0.5))*2;
     if(saltando==0 && contTiempoEntreSalto>=tiempoEntreSalto){
       saltando=1;
       contTiempoEntreSalto=0;
@@ -220,8 +205,8 @@ function draw() {
   
   //ojos
   fill(0); 
-  ellipse(x+25, y+51+posY/4, 20, 22);
-  ellipse(x-25, y+51+posY/4, 20, 22);
+  ellipse(x+25, y+51+posY/4, 20, 22+cantando);
+  ellipse(x-25, y+51+posY/4, 20, 22+cantando);
   
   fill(color( 255,  255,  255)); 
   if(parpadeoCont>=parpadeo){     //parpadeo
@@ -233,8 +218,8 @@ function draw() {
       parpadeo=50+random(500);
     }
   }else{
-    ellipse(x+25, y+50+posY/4, 20, 20);
-    ellipse(x-25, y+50+posY/4, 20, 20);
+    ellipse(x+25, y+50+posY/4, 20, 20+cantando);
+    ellipse(x-25, y+50+posY/4, 20, 20+cantando);
     parpadeoCont++;
     parpadeoCloseCont=0;
   }
@@ -289,5 +274,5 @@ function draw() {
   if(contTiempoEntreSalto>1000){
   contTiempoEntreSalto=0;
   }
-  
+
 }

@@ -44,7 +44,7 @@ function tocar(nota){
   contNotas++;
   this.notas[nota].tocar();
   this.notas[nota].setVol(contNotas*-5);
-  print(contNotas*-5);
+  //(contNotas*-5);
   visual(nota);
   //osc.volume.value=0.5;
 
