@@ -20,7 +20,7 @@
 <body id ="container">
   <div class="modal-inicio" id="modal-inicio">
     <h2>Bienvenido a TIP Piano!</h2><br>
-    <h5>En esta aplicacion se recibiran notas de otra persona que este tocando y se reproducira un sonido, este sonido cambiara dependiendo de los modificadores disponibles.</h5><br>
+    <h5>En esta aplicacion se recibiran notas de otra persona que este tocando y se reproducira un sonido, este sonido cambiara dependiendo de los modificadores disponibles.Elija la sala en que tocara el musico</h5><br>
     <select id="sala" name="sala" class="tipo"> 
       <option value="1">Sala 1</option>
       <option value="2">Sala 2</option>
@@ -67,12 +67,14 @@
         var partes = msg.split("-");  
         if(partes[1]=="down"){
           tocar(partes[0]);
+          setY(partes[0]);
         }
         if(partes[1]=="up"){
           tocarUp(partes[0]);
+          dejarDeTocar();
         }
         
-        //setY(msg);
+        //
       });
            
 		});

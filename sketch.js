@@ -27,9 +27,10 @@ var tamañoBoca=2;
 
 
 
-var cantando=0;
-var tiempoCantando=25;
-var cantandoCont=0;
+var cantando=1;
+var cantandoBool=false;
+//var tiempoCantando=25;
+
 
 function setup() {  
   altura=windowHeight-(windowHeight*(0.4));     //alto y margen
@@ -56,14 +57,23 @@ function setup() {
 function iniciar(){
   inicio=true;
 }
+function dejarDeTocar() {
+  cantando--;
+  if(cantando<1){
+    cantando=1;
+  }
+  if(cantando==1){
+    cantandoBool=false;
+  }
+}
 function setY(num) {
   if(inicio){
   //var octava =document.getElementById("octava").value;
   //notaFinal=num+(12*octava);
-
+  cantando++;
+  cantandoBool=true;
   futureY=10+(altura-(num*altura)/107);
-  cantando=1;
-  cantandoCont=0;
+
 
  /* var color=num%12;
   
@@ -108,6 +118,7 @@ function setY(num) {
   }
 }
 function draw() {
+  print(cantandoBool);
   clear();
   noStroke();
   //posY=mouseY;
@@ -136,8 +147,7 @@ function draw() {
   y+=1;
   }
   contTiempoEntreSalto++;
-  if (cantando==1) {
-    cantandoCont++;
+  if (cantandoBool) {
     tamañoExtra=sin(tiempo*0.3)*2;
     if(saltando==0 && contTiempoEntreSalto>=tiempoEntreSalto){
       saltando=1;
@@ -145,13 +155,12 @@ function draw() {
       tiempoEntreSalto=random(50,120);
     }
   }else{
-    cantandoCont=0;
     tamañoExtra=0;
   }
-  if(cantandoCont>=tiempoCantando){
+  /*if(cantandoCont>=tiempoCantando){
     cantando=0;
     cantandoCont=0;
-  }
+  }*/
 
   //sombra
   fill(0,0,0,5*(y*0.05)+(posY*0.2));
@@ -233,9 +242,8 @@ function draw() {
  
   //boca 
   fill(color( 0,  0,  0)); 
-  if (cantando==1) {
+  if (cantandoBool) {
    
-    
     fill(color( 0,  0,  0)); 
     //ellipse(x, y+100+posY/5, 30, 25+(height-posY)*0.08);
     arc(x,y+70+posY*0.3, 40*tamañoBoca, (25+(height-posY)*0.15)*(tamañoBoca*0.5), 0, PI);
