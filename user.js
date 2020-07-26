@@ -137,16 +137,19 @@ function visual(nota) {
             elem.style.backgroundColor="#"+((1<<24)*Math.random()|0).toString(16);
       }
 }
-function random() {
-  alert("hola");
-  /*document.getElementById("attack").value=getRandomFloat(0,100);   
+document.getElementById("random").addEventListener("click", function(){
+
+  document.getElementById("attack").value=getRandomFloat(0,100);   
   document.getElementById("release").value=getRandomFloat(0,100); 
   document.getElementById("octava").value=getRandomInt(-2,2); 
 
   var tipo = ["sine", "square", "sawtooth", "triangle"];
   document.getElementById("tipo").value= tipo[getRandomInt(0,3)];
 
-  actualizar();*/
+  actualizar();
+});
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Hello World";
 }
 function getRandomFloat(min, max) {
   return Math.random() * (max - min) + min;
