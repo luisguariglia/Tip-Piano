@@ -1,0 +1,35 @@
+p{
+    display: inline-block;
+    vertical-align: top;
+  }
+  .value{
+    font-weight: bold;
+  }
+  .modal-inicio{
+      position: absolute;
+    margin: 5%;
+    padding: 1% ;
+    border: black;
+    border-style: solid;
+    max-width: 750px;
+    box-shadow: 0px 0px 5px black;
+    text-align: center;
+    background-color: whitesmoke;
+  }
+  button{
+    height: 50px;
+    background-color: #0aaefa;
+    padding: 2px;
+    border: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: all .2s ease-in-out;
+  }
+  button:hover{
+    transform: scale(1.05);
+  }
+  .tipo{
+    padding: 5px;
+    margin: 3px;
+    background-color: #0aaefa;         
+  }

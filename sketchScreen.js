@@ -16,7 +16,7 @@ function setY(num) {
  trigger=maximo;
 }
 function draw() {
-  clear();
+  background(0);
   rotate(cos(timer*0.005)/4);
   if(trigger>=maximo){  
     
