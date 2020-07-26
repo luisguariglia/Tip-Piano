@@ -1,10 +1,5 @@
 
-var ampEnv = new Tone.AmplitudeEnvelope().toMaster();
-var phaser = new Tone.Phaser({
-  "frequency" : 15,
-  "octaves" : 1,
-  "baseFrequency" : 500
-}).toMaster();
+var contNotas=0;
 var notas = [];
 class Sintetizador {
   constructor(nota) {
@@ -37,37 +32,30 @@ class Sintetizador {
   setOctava(num){
     this.octava=num;
   }
+  setVol(num){
+    this.synth.oscillator.volume.value=num;  //-25 es mas bajito  //100 explota el parlante
+  }
 }
 
 var inicio=false;
 
 function tocar(nota){
   if (inicio==true) {
-    
-  /*var attack = document.getElementById("attack").value/100;   
-  var release = document.getElementById("release").value/100; 
-  var tipo=document.getElementById("tipo").value ;
-  var octava =document.getElementById("octava").value;  
-
-  ampEnv.attack=attack;
-  ampEnv.release=release;
-  
-  var notaFinal=nota;
-  notaFinal=notaFinal+(12*octava);
-  osc.frequency.value = Tone.Frequency(notaFinal, "midi");
-  osc.volume.value=0.5;
-  osc.type=tipo;*/
-  //ampEnv.triggerAttackRelease("8t");
-  //synth.oscillator.frequency.value = Tone.Frequency(nota, "midi");
+  contNotas++;
   this.notas[nota].tocar();
+  this.notas[nota].setVol(contNotas*-5);
+  print(contNotas*-5);
   visual(nota);
-
-//attach a listener to the keyboard events
+  //osc.volume.value=0.5;
 
   }
 }
 function tocarUp(nota){
   if (inicio==true) {
+    contNotas--;
+    if(contNotas<0){
+      contNotas=0;
+    }
   this.notas[nota].tocarUp();
   }
 }

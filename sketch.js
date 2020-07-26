@@ -118,7 +118,6 @@ function setY(num) {
   }
 }
 function draw() {
-  print(cantandoBool);
   clear();
   noStroke();
   //posY=mouseY;
